@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: noflix_development
+  username: noflixadmin #<%= ENV['NOFLIX_DATABASE_DEV_USER'] %>
+  password: nfpass2017 #<%= ENV['NOFLIX_DATABASE_DEV_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
