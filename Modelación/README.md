@@ -2,17 +2,28 @@
 
 ## Entidades
 
+### Usuario
+
+| Atributo | Tipo    | Ejemplo      |
+|----------|---------|--------------|
+| ID       | Integer | 1            |
+| Email    | String  | "john@doe.com" |
+| Nombre   | String  | "John Doe"     |
+| Niño     | Boolean | 0            |
+| Admin    | Boolean | 1            |
+
 ### Serie
 | Atributo | Tipo | Ejemplo |
 |-----------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ID | Integer | 128 |
-| Nombre | Texto | "Friends" |
-| Idioma | Texto | "Inglés" |
-| País | Texto | "Estados Unidos" |
-| Género | Texto | "Comedia" |
+| Nombre | String | "Friends" |
+| Idioma | String | "Inglés" |
+| País | String | "Estados Unidos" |
+| Género | String | "Comedia" |
 | Año lanzamiento | Integer | 1994 |
 | Año término | Integer | 2004 |
 | Resumen | Text | "La historia comienza con cuatro amigos (Chandler, Monica, Phoebe y Joey) conversando en una cafetería llamada Central Perk. A medida que transcurre el inicio del capítulo aparece el quinto personaje (Ross) y posteriormente la sexta (Rachel). Este encuentro dentro de la cafetería marca el comienzo de una comedia basada en la amistad, los triunfos y caídas, el amor, el pasado y el futuro de un grupo de amigos en la ciudad de Nueva York." |
+| Privada | Boolean | 0 |
 
 ### Temporada
 
@@ -27,10 +38,11 @@
 |-------------|---------|------------------------------------------------------------------------------------------------------------------------------------------|
 | ID | Integer | 234 |
 | Nº Capítulo | Integer | 1 |
-| Nombre | Text | "The Pilot" |
+| Duración | Time | 20:13 |
+| Nombre | String | "The Pilot" |
 | Resumen | Text | "A Monica (Courteney Cox) la molestan Joey (Matt LeBlanc) y Chandler (Matthew Perry) en Central Perk sobre una cita que tendrá más tarde." |
 
-### Actor
+### Actor
 
 | Atributo | Tipo    | Ejemplo          |
 |----------|---------|------------------|
@@ -43,7 +55,7 @@
 | Atributo | Tipo    | Ejemplo          |
 |----------|---------|------------------|
 | ID       | Integer | 22               |
-| Nombre   | Text    | "Gary Halvorson"   |
+| Nombre   | String    | "Gary Halvorson"   |
 
 ### Review
 
@@ -58,7 +70,7 @@
 | Atributo | Tipo    | Ejemplo |
 |----------|---------|---------|
 | ID       | Integer | 2       |
-| Idioma   | Text    | "Español" |
+| Idioma   | String    | "Español" |
 
 ### Noticia
 
@@ -86,7 +98,7 @@
 | ID Serie | Integer | 128     |
 
 
-### EsCapítuloDe
+### EsCapítuloDe
 
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
@@ -94,7 +106,7 @@
 | ID Temporada | Integer | 212     |
 
 
-### EsTemporadaDe
+### EsTemporadaDe
 
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
@@ -132,3 +144,39 @@
 |--------------|---------|---------|
 | ID Subtítulo | Integer | 2       |
 | ID Serie     | Integer | 128     |
+
+
+### EsNiñoDe
+
+| Atributo         | Tipo    | Ejemplo |
+|------------------|---------|---------|
+| ID Usuario Niño  | Integer | 4       |
+| ID Usuario Común | Integer | 1       |
+
+
+### EsSeriePrivadaDe
+| Atributo     | Tipo    | Ejemplo |
+|--------------|---------|---------|
+| ID Serie     | Integer | 222     |
+| ID Usuario Común | Integer | 1       |
+
+
+### VistoPor
+| Atributo     | Tipo    | Ejemplo |
+|--------------|---------|---------|
+| ID Capítulo     | Integer | 99     |
+| ID Usuario Común | Integer | 1       |
+
+
+### ReviewedBy
+| Atributo     | Tipo    | Ejemplo |
+|--------------|---------|---------|
+| ID Review     | Integer | 707     |
+| ID Usuario Común | Integer | 1       |
+
+
+### NoticiaInformadaPor
+| Atributo     | Tipo    | Ejemplo |
+|--------------|---------|---------|
+| ID Noticia     | Integer | 909     |
+| ID Usuario Común | Integer | 1       |
