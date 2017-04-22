@@ -69,12 +69,14 @@
 
 ## Relaciones
 
+
 ### DirigeA
 
 | Atributo    | Tipo    | Ejemplo |
 |-------------|---------|---------|
 | ID Director | Integer | 22      |
 | ID Serie    | Integer | 128     |
+
 
 ### ActúaEn
 
@@ -83,12 +85,14 @@
 | ID Actor | Integer | 33      |
 | ID Serie | Integer | 128     |
 
+
 ### EsCapítuloDe
 
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
 | ID Capítulo  | Integer | 234     |
 | ID Temporada | Integer | 212     |
+
 
 ### EsTemporadaDe
 
@@ -97,12 +101,14 @@
 | ID Temporada | Integer | 212     |
 | ID Serie     | Integer | 128     |
 
+
 ### EsReviewDeSerie
 
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
 | ID Review | Integer    | 1234    |
 | ID Serie     | Integer | 128     |
+
 
 ### EsReviewDeCapítulo
 
@@ -111,12 +117,14 @@
 | ID Review    | Integer | 1235    |
 | ID Capítulo  | Integer | 234     |
 
+
 ### EsNoticiaDe
 
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
 | ID Noticia   | Integer | 4433    |
 | ID Serie     | Integer | 128     |
+
 
 ### EsSubtítuloDe
 
