@@ -168,7 +168,7 @@
 | ID Usuario Común | Integer | 1       |
 
 
-### ReviewedBy
+### ReviewedBy
 | Atributo     | Tipo    | Ejemplo |
 |--------------|---------|---------|
 | ID Review     | Integer | 707     |
