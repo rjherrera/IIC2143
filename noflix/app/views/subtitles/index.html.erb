@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Subtitles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subtitles.each do |subtitle| %>
+      <tr>
+        <td><%= link_to 'Show', subtitle %></td>
+        <td><%= link_to 'Edit', edit_subtitle_path(subtitle) %></td>
+        <td><%= link_to 'Destroy', subtitle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Subtitle', new_subtitle_path %>
