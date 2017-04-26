@@ -17,7 +17,7 @@ class SubtitlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subtitle" do
     assert_difference('Subtitle.count') do
-      post subtitles_url, params: { subtitle: {  } }
+      post subtitles_url, params: { subtitle: { language: @subtitle.language } }
     end
 
     assert_redirected_to subtitle_url(Subtitle.last)
@@ -34,7 +34,7 @@ class SubtitlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subtitle" do
-    patch subtitle_url(@subtitle), params: { subtitle: {  } }
+    patch subtitle_url(@subtitle), params: { subtitle: { language: @subtitle.language } }
     assert_redirected_to subtitle_url(@subtitle)
   end
 

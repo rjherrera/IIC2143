@@ -69,6 +69,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.fetch(:episode, {})
+      params.require(:episode).permit(:number, :title, :duration, :plot)
     end
 end

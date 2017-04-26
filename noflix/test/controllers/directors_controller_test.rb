@@ -17,7 +17,7 @@ class DirectorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create director" do
     assert_difference('Director.count') do
-      post directors_url, params: { director: {  } }
+      post directors_url, params: { director: { name: @director.name } }
     end
 
     assert_redirected_to director_url(Director.last)
@@ -34,7 +34,7 @@ class DirectorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update director" do
-    patch director_url(@director), params: { director: {  } }
+    patch director_url(@director), params: { director: { name: @director.name } }
     assert_redirected_to director_url(@director)
   end
 

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  language: MyString
+  country: MyString
+  category: MyString
+  start_year: 1
+  end_year: 1
+  plot: MyText
+  is_private: false
+
+two:
+  title: MyString
+  language: MyString
+  country: MyString
+  category: MyString
+  start_year: 1
+  end_year: 1
+  plot: MyText
+  is_private: false

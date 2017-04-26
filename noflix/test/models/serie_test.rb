@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShowTest < ActiveSupport::TestCase
+class SerieTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

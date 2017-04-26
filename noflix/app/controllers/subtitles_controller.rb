@@ -69,6 +69,6 @@ class SubtitlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subtitle_params
-      params.fetch(:subtitle, {})
+      params.require(:subtitle).permit(:language)
     end
 end

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
   <tbody>
     <% @subtitles.each do |subtitle| %>
       <tr>
+        <td><%= subtitle.language %></td>
         <td><%= link_to 'Show', subtitle %></td>
         <td><%= link_to 'Edit', edit_subtitle_path(subtitle) %></td>
         <td><%= link_to 'Destroy', subtitle, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @series.title %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @series.language %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @series.country %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @series.category %>
+</p>
+
+<p>
+  <strong>Start year:</strong>
+  <%= @series.start_year %>
+</p>
+
+<p>
+  <strong>End year:</strong>
+  <%= @series.end_year %>
+</p>
+
+<p>
+  <strong>Plot:</strong>
+  <%= @series.plot %>
+</p>
+
+<p>
+  <strong>Is private:</strong>
+  <%= @series.is_private %>
+</p>
+
+<%= link_to 'Edit', edit_series_path(@series) %> |
+<%= link_to 'Back', series_path %>

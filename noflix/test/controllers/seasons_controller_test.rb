@@ -17,7 +17,7 @@ class SeasonsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create season" do
     assert_difference('Season.count') do
-      post seasons_url, params: { season: {  } }
+      post seasons_url, params: { season: { number: @season.number } }
     end
 
     assert_redirected_to season_url(Season.last)
@@ -34,7 +34,7 @@ class SeasonsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update season" do
-    patch season_url(@season), params: { season: {  } }
+    patch season_url(@season), params: { season: { number: @season.number } }
     assert_redirected_to season_url(@season)
   end
 
