@@ -9,16 +9,27 @@
   </head>
 
   <body>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <ul class="hmenu">
-      <%= render 'devise/menu/registration_items' %>
-      <%= render 'devise/menu/login_items' %>
-    </ul>
-    <%= yield %>
+    <div class="ui top fixed inverted big menu" id="menu_header">
+      <div class="ui container">
+        <%= link_to('noFLIX', root_path, class: 'item', id: 'logo') %>
+        <div class="right menu">
+          <%= render 'devise/menu/registration_items' %>
+          <%= render 'devise/menu/login_items' %>
+        </div>
+      </div>
+    </div>
+    <%= yield :outer %>
+    <div id="main_container">
+      <div class="ui container inverted segment" id="page_container">
+        <!-- <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+        -->
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
