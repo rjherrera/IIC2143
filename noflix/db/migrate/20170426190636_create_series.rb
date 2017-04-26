@@ -8,7 +8,6 @@ class CreateSeries < ActiveRecord::Migration[5.0]
       t.integer :start_year
       t.integer :end_year
       t.text :plot
-      t.boolean :is_private
 
       t.timestamps
     end
