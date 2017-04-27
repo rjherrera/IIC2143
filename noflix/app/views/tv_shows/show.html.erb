@@ -35,5 +35,15 @@
   <%= @tv_show.plot %>
 </p>
 
+<p>
+  <strong>Director ID:</strong>
+  <%= @tv_show.director_id %>
+</p>
+
+<p>
+  <strong>Owner ID:</strong>
+  <%= @tv_show.owner_id %>
+</p>
+
 <%= link_to 'Edit', edit_tv_show_path(@tv_show) %> |
 <%= link_to 'Back', tv_shows_path %>

@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Number</th>
+      <th>TvShow ID</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @seasons.each do |season| %>
       <tr>
         <td><%= season.number %></td>
+        <td><%= season.tv_show_id %></td>
         <td><%= link_to 'Show', season %></td>
         <td><%= link_to 'Edit', edit_season_path(season) %></td>
         <td><%= link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' } %></td>

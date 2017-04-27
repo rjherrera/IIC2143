@@ -69,6 +69,6 @@ class TvShowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tv_show_params
-      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot)
+      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :owner_id)
     end
 end
