@@ -8,7 +8,6 @@ one:
   start_year: 1
   end_year: 1
   plot: MyText
-  is_private: false
 
 two:
   title: MyString
@@ -18,4 +17,3 @@ two:
   start_year: 1
   end_year: 1
   plot: MyText
-  is_private: false

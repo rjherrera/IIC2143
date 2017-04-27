@@ -1,4 +1,4 @@
 class Season < ApplicationRecord
-    belongs_to :serie
+    belongs_to :tv_show
     has_many :episodes
 end

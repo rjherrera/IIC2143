@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @tv_show.title %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @tv_show.language %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @tv_show.country %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @tv_show.category %>
+</p>
+
+<p>
+  <strong>Start year:</strong>
+  <%= @tv_show.start_year %>
+</p>
+
+<p>
+  <strong>End year:</strong>
+  <%= @tv_show.end_year %>
+</p>
+
+<p>
+  <strong>Plot:</strong>
+  <%= @tv_show.plot %>
+</p>
+
+<%= link_to 'Edit', edit_tv_show_path(@tv_show) %> |
+<%= link_to 'Back', tv_shows_path %>

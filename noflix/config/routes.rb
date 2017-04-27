@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :tv_shows
   resources :subtitles
   resources :reviews
   resources :directors
   resources :actors
   resources :episodes
-  resources :series
   resources :seasons
   resources :articles
   devise_for :users

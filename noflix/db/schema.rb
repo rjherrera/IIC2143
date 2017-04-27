@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "actors_series", id: false, force: :cascade do |t|
-    t.integer "actor_id",  null: false
-    t.integer "series_id", null: false
+  create_table "actors_tv_shows", id: false, force: :cascade do |t|
+    t.integer "actor_id",   null: false
+    t.integer "tv_show_id", null: false
   end
 
   create_table "articles", force: :cascade do |t|
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "serie_id"
-    t.index ["serie_id"], name: "index_articles_on_serie_id", using: :btree
+    t.integer  "tv_show_id"
+    t.index ["tv_show_id"], name: "index_articles_on_tv_show_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
@@ -63,11 +63,11 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "serie_id"
+    t.integer  "tv_show_id"
     t.integer  "user_id"
     t.integer  "episode_id"
     t.index ["episode_id"], name: "index_reviews_on_episode_id", using: :btree
-    t.index ["serie_id"], name: "index_reviews_on_serie_id", using: :btree
+    t.index ["tv_show_id"], name: "index_reviews_on_tv_show_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
@@ -75,11 +75,22 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.integer  "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "serie_id"
-    t.index ["serie_id"], name: "index_seasons_on_serie_id", using: :btree
+    t.integer  "tv_show_id"
+    t.index ["tv_show_id"], name: "index_seasons_on_tv_show_id", using: :btree
   end
 
-  create_table "series", force: :cascade do |t|
+  create_table "subtitles", force: :cascade do |t|
+    t.string   "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subtitles_tv_shows", id: false, force: :cascade do |t|
+    t.integer "subtitle_id", null: false
+    t.integer "tv_show_id",  null: false
+  end
+
+  create_table "tv_shows", force: :cascade do |t|
     t.string   "title"
     t.string   "language"
     t.string   "country"
@@ -91,19 +102,8 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.datetime "updated_at",  null: false
     t.integer  "director_id"
     t.integer  "owner_id"
-    t.index ["director_id"], name: "index_series_on_director_id", using: :btree
-    t.index ["owner_id"], name: "index_series_on_owner_id", using: :btree
-  end
-
-  create_table "series_subtitles", id: false, force: :cascade do |t|
-    t.integer "subtitle_id", null: false
-    t.integer "series_id",   null: false
-  end
-
-  create_table "subtitles", force: :cascade do |t|
-    t.string   "language"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["director_id"], name: "index_tv_shows_on_director_id", using: :btree
+    t.index ["owner_id"], name: "index_tv_shows_on_owner_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,14 +128,14 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "articles", "series", column: "serie_id"
+  add_foreign_key "articles", "tv_shows"
   add_foreign_key "articles", "users"
   add_foreign_key "episodes", "seasons"
   add_foreign_key "reviews", "episodes"
-  add_foreign_key "reviews", "series", column: "serie_id"
+  add_foreign_key "reviews", "tv_shows"
   add_foreign_key "reviews", "users"
-  add_foreign_key "seasons", "series", column: "serie_id"
-  add_foreign_key "series", "directors"
-  add_foreign_key "series", "users", column: "owner_id"
+  add_foreign_key "seasons", "tv_shows"
+  add_foreign_key "tv_shows", "directors"
+  add_foreign_key "tv_shows", "users", column: "owner_id"
   add_foreign_key "users", "users", column: "father_id"
 end

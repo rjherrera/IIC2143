@@ -1,3 +1,3 @@
 class Director < ApplicationRecord
-    has_many :series
+    has_many :tv_shows
 end
