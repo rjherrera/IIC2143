@@ -27,12 +27,23 @@ class TvShowsController < ApplicationController
 
   # GET /tv_shows/1/edit
   def edit
+    if !current_user.is_admin and current_user.id != @tv_show.owner_id
+      redirect_to TvShow
+    end
   end
 
   # POST /tv_shows
   # POST /tv_shows.json
   def create
-    @tv_show = TvShow.new(tv_show_params)
+    name = tv_show_params[:director_id]
+    if !Director.exists?(:name => name)
+      Director.create(name: name)
+    end
+    new_tsp = tv_show_params
+    new_tsp[:director_id] = Director.find_by_name(name).id
+    new_tsp[:owner_id] = current_user.id
+    @tv_show = TvShow.new(new_tsp)
+
 
     respond_to do |format|
       if @tv_show.save
