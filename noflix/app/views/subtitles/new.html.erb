@@ -2,4 +2,8 @@
 
 <%= render 'form', subtitle: @subtitle %>
 
-<%= link_to 'Back', subtitles_path %>
+<div style="margin: 20px 0;">
+    <%= link_to(subtitles_path, :class => "ui left floated basic small teal labeled icon button") do %>
+        <i class="angle left icon"></i> Back
+    <% end %>
+</div>

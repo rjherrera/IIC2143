@@ -2,5 +2,9 @@
 
 <%= render 'form', actor: @actor %>
 
-<%= link_to 'Show', @actor %> |
-<%= link_to 'Back', actors_path %>
+<!-- <%= link_to 'Show', @actor %> | -->
+<div style="margin: 20px 0;">
+    <%= link_to(actors_path, :class => "ui left floated basic small teal labeled icon button") do %>
+        <i class="angle left icon"></i> Back
+    <% end %>
+</div>
