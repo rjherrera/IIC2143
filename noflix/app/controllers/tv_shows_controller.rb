@@ -1,6 +1,6 @@
 class TvShowsController < ApplicationController
   before_action :set_tv_show, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
 
 
@@ -18,6 +18,11 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/new
   def new
     @tv_show = TvShow.new
+    if current_user.is_admin
+      @tv_show.owner_id = nil
+    else
+      @tv_show.owner_id = current_user.id
+    end
   end
 
   # GET /tv_shows/1/edit

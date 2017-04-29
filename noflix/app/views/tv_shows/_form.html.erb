@@ -53,8 +53,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :owner_id %>
-    <%= f.text_field :owner_id %>
+    <!-- <%= f.label :owner_id %> -->
+    <%= f.hidden_field :owner_id, :value => tv_show.owner_id %>
   </div>
 
   <div class="field">
