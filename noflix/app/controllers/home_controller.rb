@@ -5,11 +5,12 @@ class HomeController < ApplicationController
           if @user.is_admin
             redirect_to tv_shows_path
           else
-            redirect_to actors_path
-          end
-        else
             @tv_shows = TvShow.all
             render 'home'
+          end
+        else
+          @tv_shows = TvShow.all
+          render 'home'
         end
     end
 end
