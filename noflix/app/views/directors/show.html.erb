@@ -1,3 +1,5 @@
+<h1>Director</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -5,5 +7,15 @@
   <%= @director.name %>
 </p>
 
-<%= link_to 'Edit', edit_director_path(@director) %> |
-<%= link_to 'Back', directors_path %>
+<div class="ui list" style="width: 120px;">
+    <div class="item">
+        <%= link_to(edit_director_path(@director), :class => "ui left floated small teal labeled icon button fluid") do %>
+            <i class="edit icon"></i> Edit
+        <% end %>
+    </div>
+    <div class="item">
+        <%= link_to(directors_path, :class => "ui left floated basic small teal labeled icon button fluid") do %>
+            <i class="angle left icon"></i> Back
+        <% end %>
+    </div>
+</div>
