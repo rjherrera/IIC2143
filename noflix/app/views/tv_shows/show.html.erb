@@ -1,49 +1,58 @@
+<h2>Tv Show</h2>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @tv_show.title %>
-</p>
+<div class="ui two column grid">
+  <div class="six wide column">
+          <img src="<%= asset_path('how.jpg') %>" style="width: 100%;"/>
+    </div>
+  <div class="ten wide column">
+      <p>
+        <strong>Title:</strong>
+        <%= @tv_show.title %>
+      </p>
 
-<p>
-  <strong>Language:</strong>
-  <%= @tv_show.language %>
-</p>
+      <p>
+        <strong>Language:</strong>
+        <%= @tv_show.language %>
+      </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @tv_show.country %>
-</p>
+      <p>
+        <strong>Country:</strong>
+        <%= @tv_show.country %>
+      </p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @tv_show.category %>
-</p>
+      <p>
+        <strong>Category:</strong>
+        <%= @tv_show.category %>
+      </p>
 
-<p>
-  <strong>Start year:</strong>
-  <%= @tv_show.start_year %>
-</p>
+      <p>
+        <strong>Start year:</strong>
+        <%= @tv_show.start_year %>
+      </p>
 
-<p>
-  <strong>End year:</strong>
-  <%= @tv_show.end_year %>
-</p>
+      <p>
+        <strong>End year:</strong>
+        <%= @tv_show.end_year %>
+      </p>
 
-<p>
-  <strong>Plot:</strong>
-  <%= @tv_show.plot %>
-</p>
+      <p>
+        <strong>Plot:</strong>
+        <%= @tv_show.plot %>
+      </p>
 
-<p>
-  <strong>Director ID:</strong>
-  <%= @tv_show.director_id %>
-</p>
+      <p>
+        <strong>Director ID:</strong>
+        <%= @tv_show.director_id %>
+      </p>
 
-<p>
-  <strong>Owner ID:</strong>
-  <%= @tv_show.owner_id %>
-</p>
+      <p>
+        <strong>Owner ID:</strong>
+        <%= @tv_show.owner_id %>
+      </p>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_tv_show_path(@tv_show) %> |
 <%= link_to 'Back', tv_shows_path %>
