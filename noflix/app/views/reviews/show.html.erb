@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stars:</strong>
+  <%= @review.stars %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @review.comment %>
+</p>
+
+<p>
+  <strong>TvShow ID:</strong>
+  <%= @review.tv_show_id %>
+</p>
+
+<p>
+  <strong>User ID:</strong>
+  <%= @review.user_id %>
+</p>
+
+<p>
+  <strong>Episode ID:</strong>
+  <%= @review.episode_id %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>
