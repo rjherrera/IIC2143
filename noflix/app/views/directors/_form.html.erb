@@ -1,9 +1,10 @@
-<%= form_for(director) do |f| %>
+<%= form_for(director, :html => {:class => 'ui inverted form'}) do |f| %>
   <% if director.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(director.errors.count, "error") %> prohibited this director from being saved:</h2>
+    <div id="error_explanation" class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header"><%= pluralize(director.errors.count, "error") %> prohibited this director from being saved:</div>
 
-      <ul>
+      <ul class="list">
       <% director.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -16,7 +17,7 @@
     <%= f.text_field :name %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+      <%= f.submit :class => 'ui teal button' %>
   </div>
 <% end %>
