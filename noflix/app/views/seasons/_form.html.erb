@@ -1,9 +1,9 @@
-<%= form_for(season) do |f| %>
+<%= form_for(season, :html => {:class => 'ui inverted form'}) do |f| %>
   <% if season.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(season.errors.count, "error") %> prohibited this season from being saved:</h2>
+    <div id="error_explanation" class="ui negative message">
+      <div class="header"><%= pluralize(season.errors.count, "error") %> prohibited this season from being saved:</div>
 
-      <ul>
+      <ul class="list">
       <% season.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -21,7 +21,7 @@
     <%= f.text_field :tv_show_id %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+      <%= f.submit :class => 'ui teal button' %>
   </div>
 <% end %>
