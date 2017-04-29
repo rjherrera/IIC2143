@@ -1,9 +1,20 @@
+<h1>Actor</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
   <%= @actor.name %>
 </p>
-
-<%= link_to 'Edit', edit_actor_path(@actor) %> |
-<%= link_to 'Back', actors_path %>
+<div class="ui list" style="width: 120px;">
+    <div class="item">
+        <%= link_to(edit_actor_path(@actor), :class => "ui left floated small teal labeled icon button fluid") do %>
+            <i class="edit icon"></i> Edit
+        <% end %>
+    </div>
+    <div class="item">
+        <%= link_to(actors_path, :class => "ui left floated basic small teal labeled icon button fluid") do %>
+            <i class="angle left icon"></i> Back
+        <% end %>
+    </div>
+</div>

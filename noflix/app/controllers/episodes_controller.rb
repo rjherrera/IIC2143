@@ -15,6 +15,7 @@ class EpisodesController < ApplicationController
   # GET /episodes/new
   def new
     @episode = Episode.new
+    @episode.season_id = params[:season_id0]
   end
 
   # GET /episodes/1/edit

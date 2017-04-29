@@ -2,5 +2,9 @@
 
 <%= render 'form', director: @director %>
 
-<%= link_to 'Show', @director %> |
-<%= link_to 'Back', directors_path %>
+<!-- <%= link_to 'Show', @director %> | -->
+<div style="margin: 20px 0;">
+    <%= link_to(directors_path, :class => "ui left floated basic small teal labeled icon button") do %>
+        <i class="angle left icon"></i> Back
+    <% end %>
+</div>
