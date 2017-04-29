@@ -1,1 +1,34 @@
-<h1>Main</h1>
+<!-- <h1 class="logo">noFLIX</h1>
+ -->
+
+<div class="ui search">
+  <div class="ui icon input">
+    <input class="prompt" type="text" placeholder="TV shows...">
+    <i class="search icon"></i>
+  </div>
+  <div class="results"></div>
+</div>
+
+<% @tv_shows.each do |t| %>
+    <h1>
+        <%= t.title %>
+    </h1>
+<% end %>
+
+<script type="text/javascript">
+var content = [
+<% @tv_shows[0..5].each do |t| %>
+{ title: '<%= t.title %>', id:  <%= t.id %>},
+<% end %>
+];
+$('.ui.search')
+  .search({
+    source: content,
+    onSelect: function(result){
+        var naive_url = "<%= tv_show_path(1) %>"
+        window.location.replace(naive_url.slice(0, -1) + result.id);
+    }
+  });
+
+
+</script>
