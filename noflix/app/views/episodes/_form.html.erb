@@ -33,8 +33,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :season_id %>
-    <%= f.text_field :season_id %>
+    <!-- <%= f.label :season_id %> -->
+    <%= f.hidden_field :season_id, :value => episode.season_id %>
   </div>
 
   <div class="field">

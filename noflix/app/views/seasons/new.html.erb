@@ -2,4 +2,4 @@
 
 <%= render 'form', season: @season%>
 
-<%= link_to 'Back', seasons_path %>
+<%= link_to 'Back', tv_shows_path + '/'  + @season.tv_show_id.to_s + "/edit" %>

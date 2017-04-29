@@ -2,5 +2,6 @@
 
 <%= render 'form', season: @season %>
 
+<%= link_to 'New Episode', new_episode_path(season_id0: @season.id)%> |
 <%= link_to 'Show', @season %> |
 <%= link_to 'Back', seasons_path %>
