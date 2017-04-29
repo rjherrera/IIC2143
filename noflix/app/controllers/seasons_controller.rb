@@ -15,6 +15,7 @@ class SeasonsController < ApplicationController
   # GET /seasons/new
   def new
     @season = Season.new
+    @season.tv_show_id = params[:tv_show_id0]
   end
 
   # GET /seasons/1/edit
