@@ -2,5 +2,6 @@
 
 <%= render 'form', tv_show: @tv_show %>
 
+<%= link_to 'New Season', new_season_path(tv_show_id0: @tv_show)%> |
 <%= link_to 'Show', @tv_show %> |
 <%= link_to 'Back', tv_shows_path %>
