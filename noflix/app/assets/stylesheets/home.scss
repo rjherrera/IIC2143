@@ -21,12 +21,14 @@
 }
 
 
-#logo {
-  font-size: 1.5em;
-  padding-top: 0;
-  padding-bottom: 0;
-  color: white;
+#logo, .logo{
   /*text-transform: uppercase;*/
   letter-spacing: -1px;
   font-weight: bold;
+}
+
+#logo {
+    font-size: 1.5em;
+    padding-top: 0;
+    padding-bottom: 0;
 }

@@ -8,6 +8,7 @@ class HomeController < ApplicationController
             redirect_to actors_path
           end
         else
+            @tv_shows = TvShow.all
             render 'home'
         end
     end
