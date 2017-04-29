@@ -44,9 +44,9 @@ end
 
 # --- Seasons ---
 himym = TvShow.find_by_title("How I Met Your Mother").id
-Season.create(number: 1, tv_show_id: himym)
-Season.create(number: 2, tv_show_id: himym)
-Season.create(number: 3, tv_show_id: himym)
+TvShow.find_by_title("How I Met Your Mother").seasons << Season.create(number: 1)
+TvShow.find_by_title("How I Met Your Mother").seasons << Season.create(number: 2)
+TvShow.find_by_title("How I Met Your Mother").seasons << Season.create(number: 3)
 
 # --- Episodes ---
 himym_s1 = Season.find_by(number: 1, tv_show_id: himym).id
@@ -106,7 +106,8 @@ actors_list = [
   "Jason Segel"
 ]
 actors_list.each do |name|
-  Actor.create( name: name, tv_shows: TvShow.where(title: 'How I Met Your Mother') )
+  Actor.create(name: name)
+  TvShow.find_by_title('How I Met Your Mother').actors << Actor.find_by_name(name)
 end
 
 # --- Subtitles ---
@@ -117,5 +118,8 @@ subtitles_list = [
     "German"
 ]
 subtitles_list.each do |language|
-  Subtitle.create( language: language, tv_shows: TvShow.where(title: 'How I Met Your Mother') )
+  Subtitle.create( language: language)
 end
+
+TvShow.find_by_title("How I Met Your Mother").subtitles << Subtitle.find_by_language("Spanish")
+TvShow.find_by_title("How I Met Your Mother").subtitles << Subtitle.find_by_language("Italian")

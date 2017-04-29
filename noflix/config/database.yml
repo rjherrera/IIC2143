@@ -24,6 +24,7 @@ default: &default
 development:
   <<: *default
   database: noflix_development
+  host: localhost
   username: noflixadmin #<%= ENV['NOFLIX_DATABASE_DEV_USER'] %>
   password: nfpass2017 #<%= ENV['NOFLIX_DATABASE_DEV_PASSWORD'] %>
 
