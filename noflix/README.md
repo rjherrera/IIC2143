@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Optamos a los siguientes bonus:
+1. Kanban style:
+![Trello Grupal](https://drive.google.com/uc?id=0B6P1nrufHXdpZWxSbTF6MVVBR2s)
 
-Things you may want to cover:
+2. Buenas prácticas de Git
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+3. Deploy master: [Noflix](http://noflix.herokuapp.com/)
