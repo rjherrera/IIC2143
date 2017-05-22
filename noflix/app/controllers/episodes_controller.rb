@@ -12,6 +12,9 @@ class EpisodesController < ApplicationController
   def show
     @season = Season.find(@episode.season_id)
     @tv_show = TvShow.find(@season.tv_show_id)
+    @reviews = Review.where(episode_id: @episode.id)
+    @review = Review.new
+    @user = current_user
   end
 
   # GET /episodes/new

@@ -1,6 +1,6 @@
 <h2><%= @tv_show.title %> <i class="chevron right icon"></i> Season <%= @season.number %> <i class="chevron right icon"></i> Episode <%= @episode.number %></h2>
 
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <div class="ui two column grid">
   <div class="seven wide column">
@@ -18,52 +18,29 @@
   <div class="nine wide column">
       <div class="ui comments">
         <h2 class="ui dividing header" style="color: white;">Reviews</h2>
-        <div class="comment">
-            <!-- <a class="avatar">
-              <img src="<%= asset_path('steve.jpg') %>"/>
-            </a> -->
-          <div class="content">
-            <a class="author" style="color: white;">Javier</a>
-            <div class="metadata">
-              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
+            <% @reviews.each do |review| %>
+            <div class="comment">
+                <!-- <a class="avatar">
+                  <img src="<%= asset_path('steve.jpg') %>"/>
+                </a> -->
+              <div class="content">
+                <a class="author" style="color: white; cursor: text;"><%= @user.name %></a>
+                <div class="metadata">
+                  <span class="date" style="color: rgba(255, 255, 255, 0.9);"><%= review.created_at.strftime("%d/%m/%Y") %></span>
+                </div>
+                <div class="text" style="color: white;">
+                  <div class="ui tiny star rating review" data-rating="<%= review.stars %>" style="margin-right: 5px;"></div>
+                  <%= review.comment %>
+                </div>
+              </div>
             </div>
-            <div class="text" style="color: white;">
-              <div class="ui tiny star rating review" data-rating="5" style="margin-right: 5px;"></div>
-              What an opening 10 minutes for a TV show. Superb make up effects, top drawer acting. and interesting characters. Good to see UK actor Andrew Lincoln back on TV as he has been in some of UK TV's best dramas (After Life, This Life and Teachers).
-            </div>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="content">
-            <a class="author" style="color: white;">Raimundo</a>
-            <div class="metadata">
-              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
-            </div>
-            <div class="text" style="color: white;">
-              <div class="ui tiny star rating review" data-rating="4" style="margin-right: 5px;"></div>
-              I liked the pace of the show. It was surprisingly gory too, which added to the realistic atmosphere of the pilot. The climax and in my opinion the best scene in the film really takes you by surprise and was quite nerve racking.
-            </div>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="content">
-            <a class="author" style="color: white;">Samuel</a>
-            <div class="metadata">
-              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
-            </div>
-            <div class="text" style="color: white;">
-              <div class="ui tiny star rating review" data-rating="3"></div>
-              I can not describe the frustration that has been attending this series. I watched the first three seasons without stopping, I loved the characters, history and everything that involved. At this point, I fall asleep in every episode. Nothing happens.
-            </div>
-          </div>
-        </div>
-
+            <% end %>
         <form class="ui form" style="margin-top: 35px;">
           <div class="field">
-            <textarea placeholder="Your review..." rows="2"></textarea>
-            <div class="ui huge star rating" style="margin-top: 10px;"></div>
+            <textarea id="review_text" placeholder="Your review..." rows="2"></textarea>
+            <div class="ui huge star rating new-review" style="margin-top: 10px;"></div>
           </div>
-          <div class="ui teal labeled submit icon button">
+          <div class="ui teal labeled submit icon button" id="add-review">
             <i class="icon star"></i> Add Review
           </div>
         </form>
@@ -78,24 +55,57 @@
 </p> -->
 
 
+<%= form_for(@review, :html => {:class => 'ui inverted form'}) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation" class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header"><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</div>
+      <ul class="list">
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.hidden_field :stars %>
+    <%= f.hidden_field :comment %>
+    <%= f.hidden_field :tv_show_id, :value => @tv_show.id %>
+    <%= f.hidden_field :user_id, :value => @user.id %>
+    <%= f.hidden_field :episode_id, :value => @episode.id %>
+
+  <div style="display: none;">
+      <%= f.submit :submit, :class => 'submit-form' %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <!-- <%= link_to 'Back', episodes_path %> -->
 <%= link_to 'Back', season_path(@season.id) %>
 
-<!-- Add Review Rating -->
-<script type="text/javascript">
-$('.rating')
-.rating({
-initialRating: 5,
-maxRating: 5
-})
-;
-</script>
 
-<!-- Review Rating -->
 <script type="text/javascript">
-$('.review')
-.rating('disable')
-;
+    // Rating default stars = 5
+    $('.rating').rating({
+        initialRating: 5,
+        maxRating: 5
+    });
+    // New Review -> stars
+    $('#review_stars').val(5);
+    $('.new-review')
+      .rating('setting', 'onRate', function(value) {
+        $('#review_stars').val(value);
+      });
+    // New Review -> comment
+    $("#review_text").on('change keyup paste', function() {
+        $('#review_comment').val($("#review_text").val());
+    });
+    $
+    // New Review -> submit
+    $("#add-review").click(function(){
+        $(".submit-form").click();
+    });
+
+    // Review Rating
+    $('.review').rating('disable');
 </script>
