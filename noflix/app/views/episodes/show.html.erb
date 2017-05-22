@@ -2,21 +2,100 @@
 
 <p id="notice"><%= notice %></p>
 
-<h3><%= @episode.title %></h2>
+<div class="ui two column grid">
+  <div class="seven wide column">
+      <h3><%= @episode.title %></h2>
 
-<p>
-  <%= @episode.plot %>
-</p>
+      <p>
+        <%= @episode.plot %>
+      </p>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @episode.duration.strftime("%M") %> minutes
-</p>
+      <p>
+        <strong>Duration:</strong>
+        <%= @episode.duration.strftime("%M") %> minutes
+      </p>
+  </div>
+  <div class="nine wide column">
+      <div class="ui comments">
+        <h2 class="ui dividing header" style="color: white;">Reviews</h2>
+        <div class="comment">
+            <!-- <a class="avatar">
+              <img src="<%= asset_path('steve.jpg') %>"/>
+            </a> -->
+          <div class="content">
+            <a class="author" style="color: white;">Javier</a>
+            <div class="metadata">
+              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
+            </div>
+            <div class="text" style="color: white;">
+              <div class="ui tiny star rating review" data-rating="5" style="margin-right: 5px;"></div>
+              What an opening 10 minutes for a TV show. Superb make up effects, top drawer acting. and interesting characters. Good to see UK actor Andrew Lincoln back on TV as he has been in some of UK TV's best dramas (After Life, This Life and Teachers).
+            </div>
+          </div>
+        </div>
+        <div class="comment">
+          <div class="content">
+            <a class="author" style="color: white;">Raimundo</a>
+            <div class="metadata">
+              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
+            </div>
+            <div class="text" style="color: white;">
+              <div class="ui tiny star rating review" data-rating="4" style="margin-right: 5px;"></div>
+              I liked the pace of the show. It was surprisingly gory too, which added to the realistic atmosphere of the pilot. The climax and in my opinion the best scene in the film really takes you by surprise and was quite nerve racking.
+            </div>
+          </div>
+        </div>
+        <div class="comment">
+          <div class="content">
+            <a class="author" style="color: white;">Samuel</a>
+            <div class="metadata">
+              <span class="date" style="color: rgba(255, 255, 255, 0.9);">22/05/2017</span>
+            </div>
+            <div class="text" style="color: white;">
+              <div class="ui tiny star rating review" data-rating="3"></div>
+              I can not describe the frustration that has been attending this series. I watched the first three seasons without stopping, I loved the characters, history and everything that involved. At this point, I fall asleep in every episode. Nothing happens.
+            </div>
+          </div>
+        </div>
+
+        <form class="ui form" style="margin-top: 35px;">
+          <div class="field">
+            <textarea placeholder="Your review..." rows="2"></textarea>
+            <div class="ui huge star rating" style="margin-top: 10px;"></div>
+          </div>
+          <div class="ui teal labeled submit icon button">
+            <i class="icon star"></i> Add Review
+          </div>
+        </form>
+      </div>
+  </div>
+
+</div>
 
 <!-- <p>
   <strong>Season ID:</strong>
   <%= @episode.season_id %>
 </p> -->
 
+
+
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
-<%= link_to 'Back', episodes_path %>
+<!-- <%= link_to 'Back', episodes_path %> -->
+<%= link_to 'Back', season_path(@season.id) %>
+
+<!-- Add Review Rating -->
+<script type="text/javascript">
+$('.rating')
+.rating({
+initialRating: 5,
+maxRating: 5
+})
+;
+</script>
+
+<!-- Review Rating -->
+<script type="text/javascript">
+$('.review')
+.rating('disable')
+;
+</script>
