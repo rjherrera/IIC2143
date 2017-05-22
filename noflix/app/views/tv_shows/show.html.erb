@@ -14,6 +14,15 @@
         <%= @tv_show.language %>
       <p>
 
+      <p>
+        <strong>Subtitles:</strong>
+        <div class="ui bulleted list">
+            <% @subtitles.each do |subtitle| %>
+            <div class="item"><%= subtitle.language %></div>
+            <% end %>
+        </div>
+      <p>
+
       </p>
         <strong>Country:</strong>
         <%= @tv_show.country %>
