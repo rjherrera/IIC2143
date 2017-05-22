@@ -1,4 +1,4 @@
-<h1>Tv Shows</h1>
+<!-- <h1>Tv Shows</h1> -->
 
 <p id="notice"><%= notice %></p>
 
@@ -25,8 +25,11 @@
                 <div class="meta"><%= tv_show.start_year %></div>
               </div>
               <div class="extra content">
-              <i class="star icon"></i>
-              <%= tv_show.stars_avg %>
+                <% if tv_show.stars_avg != "-" %>
+                <div class="ui star rating" data-rating="<%= tv_show.stars_avg %>"></div>
+                <% else %>
+                <i class="star icon"></i>No reviews
+                <% end %>
             </div>
         <% end %>
     <% end %>
@@ -51,3 +54,12 @@ $('.ui.search')
 <br>
 
 <%= link_to 'New Tv Show', new_tv_show_path %>
+
+<script type="text/javascript">
+// Rating default stars = 5
+$('.rating').rating({
+    initialRating: 5,
+    maxRating: 5
+});
+$('.rating').rating('disable');
+</script>

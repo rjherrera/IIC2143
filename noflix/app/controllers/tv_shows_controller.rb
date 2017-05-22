@@ -11,7 +11,7 @@ class TvShowsController < ApplicationController
     @tv_shows.each do |tv_show|
         stars_avg = Review.where(tv_show_id: tv_show.id).average(:stars)
         if stars_avg != nil
-            tv_show.stars_avg = '%.1f' % stars_avg
+            tv_show.stars_avg = stars_avg.round
         else
             tv_show.stars_avg = "-"
         end

@@ -24,8 +24,11 @@
                 <div class="meta"><%= tv_show.start_year %></div>
               </div>
               <div class="extra content">
-              <i class="star icon"></i>
-              4.8
+                <% if tv_show.stars_avg != "-" %>
+                <div class="ui star rating" data-rating="<%= tv_show.stars_avg %>"></div>
+                <% else %>
+                <i class="star icon"></i>No reviews
+                <% end %>
             </div>
         <% end %>
     <% end %>
@@ -45,4 +48,13 @@ $('.ui.search')
         window.location.replace(naive_url.slice(0, -1) + result.id);
     }
   });
+</script>
+
+<script type="text/javascript">
+// Rating default stars = 5
+$('.rating').rating({
+    initialRating: 5,
+    maxRating: 5
+});
+$('.rating').rating('disable');
 </script>
