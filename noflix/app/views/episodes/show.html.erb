@@ -1,29 +1,22 @@
+<h2><%= @tv_show.title %> | Season <%= @season.number %> | Episode <%= @episode.number %></h2>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Number:</strong>
-  <%= @episode.number %>
-</p>
+<h3><%= @episode.title %></h2>
 
 <p>
-  <strong>Title:</strong>
-  <%= @episode.title %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @episode.duration %>
-</p>
-
-<p>
-  <strong>Plot:</strong>
   <%= @episode.plot %>
 </p>
 
 <p>
+  <strong>Duration:</strong>
+  <%= @episode.duration.strftime("%M") %> minutes
+</p>
+
+<!-- <p>
   <strong>Season ID:</strong>
   <%= @episode.season_id %>
-</p>
+</p> -->
 
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <%= link_to 'Back', episodes_path %>
