@@ -10,26 +10,26 @@
       <div class="results"></div>
     </div>
 </div>
+
 <div class="ui horizontal divider"></div>
 
-    <div class="ui link four cards">
-        <% @tv_shows.each do |tv_show| %>
-            <%= link_to(tv_show_path(tv_show), :class => "card") do %>
-                  <div class="image">
-                      <img src="<%= asset_path('how.jpg') %>" />
-                  </div>
-                  <div class="content">
-                    <div class="header"><%= tv_show.title %></div>
-                    <div class="meta"><%= tv_show.start_year %></div>
-                  </div>
-                  <div class="extra content">
-                  <i class="star icon"></i>
-                  4.8
-                </div>
-            <% end %>
+<div class="ui link four cards">
+    <% @tv_shows.each do |tv_show| %>
+        <%= link_to(tv_show_path(tv_show), :class => "card") do %>
+              <div class="image">
+                  <img src="<%= asset_path('how.jpg') %>" />
+              </div>
+              <div class="content">
+                <div class="header"><%= tv_show.title %></div>
+                <div class="meta"><%= tv_show.start_year %></div>
+              </div>
+              <div class="extra content">
+              <i class="star icon"></i>
+              4.8
+            </div>
         <% end %>
-    </div>
-
+    <% end %>
+</div>
 
 <script type="text/javascript">
 var content = [
@@ -45,6 +45,4 @@ $('.ui.search')
         window.location.replace(naive_url.slice(0, -1) + result.id);
     }
   });
-
-
 </script>

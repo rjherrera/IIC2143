@@ -1,23 +1,20 @@
-<h2>Tv Show</h2>
-
 <p id="notice"><%= notice %></p>
 
-<div class="ui two column grid">
+<div class="ui tree column grid">
   <div class="six wide column">
-          <img src="<%= asset_path('how.jpg') %>" style="width: 100%;"/>
-    </div>
-  <div class="ten wide column">
-      <p>
-        <strong>Title:</strong>
-        <%= @tv_show.title %>
-      </p>
+    <img src="<%= asset_path('how.jpg') %>" style="width: 100%;"/>
+  </div>
+  <div class="five wide column">
+      <h2><%= @tv_show.title %></h2>
+
+      <p><%= @tv_show.plot %></p>
 
       <p>
         <strong>Language:</strong>
         <%= @tv_show.language %>
-      </p>
-
       <p>
+
+      </p>
         <strong>Country:</strong>
         <%= @tv_show.country %>
       </p>
@@ -28,21 +25,16 @@
       </p>
 
       <p>
-        <strong>Start year:</strong>
+        <strong>Start Year:</strong>
         <%= @tv_show.start_year %>
       </p>
 
       <p>
-        <strong>End year:</strong>
+        <strong>End Year:</strong>
         <%= @tv_show.end_year %>
       </p>
 
-      <p>
-        <strong>Plot:</strong>
-        <%= @tv_show.plot %>
-      </p>
-
-      <p>
+      <!-- <p>
         <strong>Director ID:</strong>
         <%= @tv_show.director_id %>
       </p>
@@ -50,12 +42,29 @@
       <p>
         <strong>Owner ID:</strong>
         <%= @tv_show.owner_id %>
-      </p>
+      </p> -->
+
   </div>
+
+  <div class="five wide column">
+    <h3>Seasons</h3>
+    <div class="ui cards">
+      <% @seasons.each do |season| %>
+          <%= link_to(season_path(season), :class => "card") do %>
+          <!-- <div class="card"> -->
+            <div class="content">
+              <div class="header" style="text-align:center;">
+                Season <%= season.number %>
+              </div>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
 </div>
 
 <div class="ui inverted list" style="width:40px">
-
   <%= link_to 'Edit', edit_tv_show_path(@tv_show), :class => 'item' %>
   <%= link_to 'Back', tv_shows_path, :class => 'item' %>
 </div>

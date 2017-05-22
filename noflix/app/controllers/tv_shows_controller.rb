@@ -13,6 +13,7 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/1
   # GET /tv_shows/1.json
   def show
+    @seasons = Season.where(tv_show_id: @tv_show.id)
   end
 
   # GET /tv_shows/new

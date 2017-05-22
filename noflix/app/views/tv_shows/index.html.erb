@@ -2,41 +2,17 @@
 
 <p id="notice"><%= notice %></p>
 
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Language</th>
-      <th>Country</th>
-      <th>Category</th>
-      <th>Start year</th>
-      <th>End year</th>
-      <th>Plot</th>
-      <th>Director ID</th>
-      <th>Owner ID</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="field">
+    <div class="ui search">
+      <div class="ui icon input">
+        <input class="prompt" type="text" placeholder="TV shows...">
+        <i class="search icon"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+</div>
 
-  <tbody>
-    <% @tv_shows.each do |tv_show| %>
-      <tr>
-        <td><%= tv_show.title %></td>
-        <td><%= tv_show.language %></td>
-        <td><%= tv_show.country %></td>
-        <td><%= tv_show.category %></td>
-        <td><%= tv_show.start_year %></td>
-        <td><%= tv_show.end_year %></td>
-        <td><%= tv_show.plot %></td>
-        <td><%= tv_show.director_id %></td>
-        <td><%= tv_show.owner_id %></td>
-        <td><%= link_to 'Show', tv_show %></td>
-        <td><%= link_to 'Edit', edit_tv_show_path(tv_show) %></td>
-        <td><%= link_to 'Destroy', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> -->
+<div class="ui horizontal divider"></div>
 
 <div class="ui link four cards">
     <% @tv_shows.each do |tv_show| %>
@@ -55,6 +31,22 @@
         <% end %>
     <% end %>
 </div>
+
+<script type="text/javascript">
+var content = [
+<% @tv_shows[0..5].each do |t| %>
+{ title: '<%= t.title %>', id:  <%= t.id %>},
+<% end %>
+];
+$('.ui.search')
+  .search({
+    source: content,
+    onSelect: function(result){
+        var naive_url = "<%= tv_show_path(1) %>"
+        window.location.replace(naive_url.slice(0, -1) + result.id);
+    }
+  });
+</script>
 
 <br>
 
