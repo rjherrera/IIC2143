@@ -74,7 +74,7 @@ tv_shows_list.each do |title, language, country, category, start_year, end_year,
                     end_year: end_year,
                     plot: plot,
                     director_id: director_id,
-                    owner_id: nil)
+                    user_id: nil)
 end
 
 # --- Seasons ---

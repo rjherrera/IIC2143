@@ -2,11 +2,10 @@ class TvShowsController < ApplicationController
   before_action :set_tv_show, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-
-
   # GET /tv_shows
   # GET /tv_shows.json
   def index
+    @user = current_user
     @tv_shows = TvShow.all
     @tv_shows.each do |tv_show|
         stars_avg = Review.where(tv_show_id: tv_show.id).average(:stars)

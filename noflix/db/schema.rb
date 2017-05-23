@@ -101,9 +101,9 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "director_id"
-    t.integer  "owner_id"
+    t.integer  "user_id"
     t.index ["director_id"], name: "index_tv_shows_on_director_id", using: :btree
-    t.index ["owner_id"], name: "index_tv_shows_on_owner_id", using: :btree
+    t.index ["user_id"], name: "index_tv_shows_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -136,6 +136,6 @@ ActiveRecord::Schema.define(version: 20170426215523) do
   add_foreign_key "reviews", "users"
   add_foreign_key "seasons", "tv_shows"
   add_foreign_key "tv_shows", "directors"
-  add_foreign_key "tv_shows", "users", column: "owner_id"
+  add_foreign_key "tv_shows", "users"
   add_foreign_key "users", "users", column: "father_id"
 end
