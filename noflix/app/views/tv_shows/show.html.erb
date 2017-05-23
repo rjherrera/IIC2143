@@ -47,10 +47,12 @@
 
   <div class="five wide column">
     <h3>Seasons</h3>
+    <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
     <div class="ui action input" style="margin-bottom: 40px;">
       <input type="number" placeholder="Season Number" id="season_n">
       <button class="ui button teal" id="add-season">Add Season</button>
     </div>
+    <% end %>
     <div class="ui cards">
       <% @seasons.each do |season| %>
           <%= link_to(season_path(season), :class => "card") do %>
