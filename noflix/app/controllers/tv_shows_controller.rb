@@ -37,11 +37,6 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/new
   def new
     @tv_show = TvShow.new
-    if current_user.is_admin
-      @tv_show.owner_id = nil
-    else
-      @tv_show.owner_id = current_user.id
-    end
   end
 
   # GET /tv_shows/1/edit
@@ -60,9 +55,12 @@ class TvShowsController < ApplicationController
     end
     new_tsp = tv_show_params
     new_tsp[:director_id] = Director.find_by_name(name).id
-    new_tsp[:owner_id] = current_user.id
+    new_tsp[:user_id] = current_user.id
     @tv_show = TvShow.new(new_tsp)
 
+    if current_user.is_admin
+      @tv_show.user_id = nil
+    end
 
     respond_to do |format|
       if @tv_show.save
