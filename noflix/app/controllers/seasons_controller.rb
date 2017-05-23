@@ -31,7 +31,9 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to @season, notice: 'Season was successfully created.' }
+        # format.html { redirect_to @season, notice: 'Season was successfully created.' }
+        @tv_show = TvShow.find(@season.tv_show_id)
+        format.html { redirect_to @tv_show, notice: 'Season was successfully created.' }
         format.json { render :show, status: :created, location: @season }
       else
         format.html { render :new }

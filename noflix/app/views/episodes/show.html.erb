@@ -69,13 +69,11 @@
           </ul>
         </div>
       <% end %>
-
         <%= f.hidden_field :stars %>
         <%= f.hidden_field :comment %>
         <%= f.hidden_field :tv_show_id, :value => @tv_show.id %>
         <%= f.hidden_field :user_id, :value => @user.id %>
         <%= f.hidden_field :episode_id, :value => @episode.id %>
-
       <div style="display: none;">
           <%= f.submit :submit, :class => 'submit-form' %>
       </div>
@@ -103,7 +101,7 @@
     $("#review_text").on('change keyup paste', function() {
         $('#review_comment').val($("#review_text").val());
     });
-    $
+
     // New Review -> submit
     $("#add-review").click(function(){
         $(".submit-form").click();

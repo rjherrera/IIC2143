@@ -30,8 +30,9 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/1
   # GET /tv_shows/1.json
   def show
-    @user = current_user  
+    @user = current_user
     @seasons = Season.where(tv_show_id: @tv_show.id)
+    @season = Season.new
     @subtitles = @tv_show.subtitles;
   end
 
@@ -42,7 +43,7 @@ class TvShowsController < ApplicationController
 
   # GET /tv_shows/1/edit
   def edit
-    if !current_user.is_admin and current_user.id != @tv_show.owner_id
+    if !current_user.is_admin and current_user.id != @tv_show.user_id
       redirect_to TvShow
     end
   end

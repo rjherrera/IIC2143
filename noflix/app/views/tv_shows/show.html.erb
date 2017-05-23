@@ -47,10 +47,13 @@
 
   <div class="five wide column">
     <h3>Seasons</h3>
+    <div class="ui action input" style="margin-bottom: 40px;">
+      <input type="number" placeholder="Season Number" id="season_n">
+      <button class="ui button teal" id="add-season">Add Season</button>
+    </div>
     <div class="ui cards">
       <% @seasons.each do |season| %>
           <%= link_to(season_path(season), :class => "card") do %>
-          <!-- <div class="card"> -->
             <div class="content">
               <div class="header" style="text-align:center;">
                 Season <%= season.number %>
@@ -60,8 +63,36 @@
       <% end %>
     </div>
   </div>
-
 </div>
+
+<%= form_for(@season, :html => {:class => 'ui inverted form'}) do |f| %>
+  <% if @season.errors.any? %>
+    <div id="error_explanation" class="ui negative message">
+      <div class="header"><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</div>
+      <ul class="list">
+      <% @season.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.hidden_field :number %>
+    <%= f.hidden_field :tv_show_id, :value => @tv_show.id %>
+    <div style="display: none;">
+        <%= f.submit :submit, :class => 'submit-form' %>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+// New Season -> number
+$("#season_n").on('change keyup paste', function() {
+    $('#season_number').val($("#season_n").val());
+});
+// New Season -> submit
+$("#add-season").click(function(){
+    $(".submit-form").click();
+});
+</script>
 
 <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
 <div class="ui inverted list" style="width:40px">
