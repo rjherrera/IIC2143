@@ -31,7 +31,7 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/1.json
   def show
     @user = current_user
-    @seasons = Season.where(tv_show_id: @tv_show.id)
+    @seasons = Season.where(tv_show_id: @tv_show.id).order('number ASC')
     @season = Season.new
     @subtitles = @tv_show.subtitles;
   end
