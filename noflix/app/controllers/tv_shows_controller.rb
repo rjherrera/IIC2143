@@ -30,6 +30,7 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/1
   # GET /tv_shows/1.json
   def show
+    @user = current_user  
     @seasons = Season.where(tv_show_id: @tv_show.id)
     @subtitles = @tv_show.subtitles;
   end

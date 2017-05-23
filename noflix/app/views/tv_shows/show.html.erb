@@ -63,7 +63,9 @@
 
 </div>
 
+<% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
 <div class="ui inverted list" style="width:40px">
   <%= link_to 'Edit', edit_tv_show_path(@tv_show), :class => 'item' %>
-  <%= link_to 'Back', tv_shows_path, :class => 'item' %>
+  <!-- <%= link_to 'Back', tv_shows_path, :class => 'item' %> -->
 </div>
+<% end %>
