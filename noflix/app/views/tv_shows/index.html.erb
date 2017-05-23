@@ -11,31 +11,56 @@
     </div>
 </div>
 
+
 <% if @user %>
-<h1>Private TV Shows</h1>
-    <% if @user.private_tv_shows.count == 0 %>
-    <h3 style="text-align:center;">You don't have any private TV Show...</h3>
-    <% else %>
-    <div class="ui link four cards">
-        <% @user.private_tv_shows.each do |private_tv_show| %>
-        <%= link_to(tv_show_path(private_tv_show), :class => "card") do %>
-              <div class="image">
-                  <img src="<%= asset_path('how.jpg') %>" />
-              </div>
-              <div class="content">
-                <div class="header"><%= private_tv_show.title %></div>
-                <div class="meta"><%= private_tv_show.start_year %></div>
-              </div>
-              <div class="extra content">
-                <% if private_tv_show.stars_avg != "-" %>
-                <div class="ui star rating" data-rating="<%= private_tv_show.stars_avg %>"></div>
-                <% else %>
-                <i class="star icon"></i>No reviews
+    <% if @user.is_admin %> <h1>All Private TV Shows</h1>
+        <div class="ui link four cards">
+            <% @tv_shows.each do |tv_show| %>
+                <% if tv_show.user_id != nil %>
+                    <%= link_to(tv_show_path(tv_show), :class => "card") do %>
+                          <div class="image">
+                              <img src="<%= asset_path('how.jpg') %>" />
+                          </div>
+                          <div class="content">
+                            <div class="header"><%= tv_show.title %></div>
+                            <div class="meta"><%= tv_show.start_year %></div>
+                          </div>
+                          <div class="extra content">
+                            <% if tv_show.stars_avg != "-" %>
+                            <div class="ui star rating" data-rating="<%= tv_show.stars_avg %>"></div>
+                            <% else %>
+                            <i class="star icon"></i>No reviews
+                            <% end %>
+                        </div>
+                    <% end %>
                 <% end %>
-              </div>
+            <% end %>
+        </div>
+    <% else %> <h1>Private TV Shows</h1>
+        <% if @user.private_tv_shows.count == 0 %>
+        <h3 style="text-align:center;">You don't have any private TV Show...</h3>
+        <% else %>
+        <div class="ui link four cards">
+            <% @user.private_tv_shows.each do |private_tv_show| %>
+            <%= link_to(tv_show_path(private_tv_show), :class => "card") do %>
+                  <div class="image">
+                      <img src="<%= asset_path('how.jpg') %>" />
+                  </div>
+                  <div class="content">
+                    <div class="header"><%= private_tv_show.title %></div>
+                    <div class="meta"><%= private_tv_show.start_year %></div>
+                  </div>
+                  <div class="extra content">
+                    <% if private_tv_show.stars_avg != "-" %>
+                    <div class="ui star rating" data-rating="<%= private_tv_show.stars_avg %>"></div>
+                    <% else %>
+                    <i class="star icon"></i>No reviews
+                    <% end %>
+                  </div>
+            <% end %>
+            <% end %>
+        </div>
         <% end %>
-        <% end %>
-    </div>
     <% end %>
 <% end %>
 
