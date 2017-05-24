@@ -28,6 +28,15 @@
       </p>
 
       <p>
+        <strong>Actors:</strong>
+        <div class="ui bulleted list">
+            <% @tv_show.actors.each do |actor| %>
+            <div class="item"><%= actor.name %></div>
+            <% end %>
+        </div>
+      <p>
+
+      <p>
         <strong>Language:</strong>
         <%= @tv_show.language %>
       <p>
