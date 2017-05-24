@@ -492,5 +492,11 @@ $(document).ready(function() {
     $("#country-dropdown").dropdown('set selected', $("#tv_show_country").val());
     $("#language-dropdown").dropdown('set selected', $("#tv_show_language").val());
     $("#category-dropdown").dropdown('set selected', $("#tv_show_category").val());
+
+    <% if @tv_show.subtitles %>
+        <% @tv_show.subtitles.each do |s| %>
+        $("#subtitles-dropdown").dropdown('set selected', "<%= s.language %>");
+        <% end %>
+    <% end %>
 });
 </script>

@@ -44,6 +44,7 @@ class TvShowsController < ApplicationController
 
   # GET /tv_shows/1/edit
   def edit
+    @subtitles = Subtitle.all
     if !current_user.is_admin and current_user.id != @tv_show.user_id
       redirect_to TvShow
     end
@@ -89,8 +90,20 @@ class TvShowsController < ApplicationController
   # PATCH/PUT /tv_shows/1
   # PATCH/PUT /tv_shows/1.json
   def update
+    new_tsp = tv_show_params
+
+    # Subtitles
+    subs_params = tv_show_params[:subtitles]
+    new_subtitles = []
+    subs_params.split(";").each do |s|
+        if Subtitle.find_by_language(s)
+            new_subtitles << Subtitle.find_by_language(s)
+        end
+    end
+    new_tsp[:subtitles] = new_subtitles
+
     respond_to do |format|
-      if @tv_show.update(tv_show_params)
+      if @tv_show.update(new_tsp)
         format.html { redirect_to @tv_show, notice: 'Tv show was successfully updated.' }
         format.json { render :show, status: :ok, location: @tv_show }
       else
