@@ -39,6 +39,7 @@ class TvShowsController < ApplicationController
   # GET /tv_shows/new
   def new
     @tv_show = TvShow.new
+    @subtitles = Subtitle.all
   end
 
   # GET /tv_shows/1/edit
@@ -51,12 +52,22 @@ class TvShowsController < ApplicationController
   # POST /tv_shows
   # POST /tv_shows.json
   def create
+    # Director Name
     name = tv_show_params[:director_id]
     if !Director.exists?(:name => name)
       Director.create(name: name)
     end
     new_tsp = tv_show_params
     new_tsp[:director_id] = Director.find_by_name(name).id
+
+    # Subtitles
+    subs_params = tv_show_params[:subtitles]
+    new_subtitles = []
+    subs_params.split(";").each do |s|
+        new_subtitles << Subtitle.find_by_language(s)
+    end
+    new_tsp[:subtitles] = new_subtitles
+
     new_tsp[:user_id] = current_user.id
     @tv_show = TvShow.new(new_tsp)
 
@@ -107,6 +118,6 @@ class TvShowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tv_show_params
-      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :owner_id)
+      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles)
     end
 end

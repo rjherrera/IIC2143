@@ -446,6 +446,18 @@
     <%= f.hidden_field :user_id, :value => tv_show.user_id %>
   </div>
 
+    <%= f.hidden_field :subtitles, :value => "" %>
+
+      <div class="field">
+        <label>Subtitles</label>
+        <select multiple="" class="ui dropdown" id="subtitles-dropdown">
+          <option value="">Select Subtitles</option>
+          <% @subtitles.each do |subtitle| %>
+          <option value="<%= subtitle.language %>"><%= subtitle.language %></option>
+          <% end %>
+        </select>
+      </div>
+
   <div class="field">
       <%= f.submit :class => 'ui teal button' %>
   </div>
@@ -455,6 +467,7 @@
 $('#country-dropdown').dropdown();
 $('#language-dropdown').dropdown();
 $('#category-dropdown').dropdown();
+$('#subtitles-dropdown').dropdown();
 // New TV Show -> country
 $("#country-dropdown").on('change', function() {
     $("#tv_show_country").val($("#country-dropdown").dropdown('get value'));
@@ -466,6 +479,13 @@ $("#language-dropdown").on('change', function() {
 // New TV Show -> category
 $("#category-dropdown").on('change', function() {
     $("#tv_show_category").val($("#category-dropdown").dropdown('get value')[0]);
+});
+// New TV Show -> subtitles
+$("#subtitles-dropdown").on('change', function() {
+    var subtitles = $("#subtitles-dropdown").dropdown('get value');
+    var subs_str = "";
+    for (i = 0; i < subtitles.length - 1; i++) subs_str += subtitles[i] + ";";
+    $("#tv_show_subtitles").val(subs_str);
 });
 // Edit fill
 $(document).ready(function() {
