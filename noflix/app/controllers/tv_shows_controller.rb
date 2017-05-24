@@ -25,6 +25,16 @@ class TvShowsController < ApplicationController
             tv_show.stars_avg = "-"
         end
     end
+
+    # Filter by Category
+    if params[:filter_category]
+        @filter_category = params[:filter_category]
+        @tv_shows = @tv_shows.select {|tv_show| tv_show.category == @filter_category }
+        if @private_tv_shows
+            @private_tv_shows = @private_tv_shows.select {|tv_show| tv_show.category == @filter_category }
+        end
+    end
+
   end
 
   # GET /tv_shows/1
