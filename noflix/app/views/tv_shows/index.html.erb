@@ -11,9 +11,11 @@
     </div>
 </div>
 
-<%= link_to(new_tv_show_path, :class=>"ui labeled icon button teal") do%>
-    <i class="add circle icon"></i>
-    New TV Show
+<% if @user %>
+    <%= link_to(new_tv_show_path, :class=>"ui labeled icon button teal") do%>
+        <i class="add circle icon"></i>
+        New TV Show
+    <% end %>
 <% end %>
 
 <% if @user %>
