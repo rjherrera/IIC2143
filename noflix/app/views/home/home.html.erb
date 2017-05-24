@@ -1,7 +1,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="field">
+<div class="field" style="margin-bottom: 20px;">
     <div class="ui search">
       <div class="ui icon input">
         <input class="prompt" type="text" placeholder="TV shows...">
@@ -11,7 +11,6 @@
     </div>
 </div>
 
-
 <% if @user %>
     <% if @user.is_admin %> <h1>All Private TV Shows</h1>
         <div class="ui link four cards">
@@ -19,7 +18,7 @@
                 <% if tv_show.user_id != nil %>
                     <%= link_to(tv_show_path(tv_show), :class => "card") do %>
                           <div class="image">
-                              <img src="<%= asset_path('how.jpg') %>" />
+                              <img src="<%= asset_path('strangerthings.jpg') %>" />
                           </div>
                           <div class="content">
                             <div class="header"><%= tv_show.title %></div>
@@ -90,8 +89,10 @@
 
 <script type="text/javascript">
 var content = [
-<% @tv_shows[0..5].each do |t| %>
-{ title: '<%= t.title %>', id:  <%= t.id %>},
+<% @tv_shows.each do |t| %>
+    <% if (@user and @user.is_admin) or (@user and @user.id == t.user_id) or (t.user_id == nil) %>
+    { title: '<%= t.title %>', id:  <%= t.id %>},
+    <% end %>
 <% end %>
 ];
 $('.ui.search')
@@ -103,10 +104,6 @@ $('.ui.search')
     }
   });
 </script>
-
-<br>
-
-<%= link_to 'New Tv Show', new_tv_show_path %>
 
 <script type="text/javascript">
 // Rating default stars = 5

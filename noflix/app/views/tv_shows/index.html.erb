@@ -94,8 +94,10 @@
 
 <script type="text/javascript">
 var content = [
-<% @tv_shows[0..5].each do |t| %>
-{ title: '<%= t.title %>', id:  <%= t.id %>},
+<% @tv_shows.each do |t| %>
+    <% if (@user and @user.is_admin) or (@user and @user.id == t.user_id) or (t.user_id == nil) %>
+    { title: '<%= t.title %>', id:  <%= t.id %>},
+    <% end %>
 <% end %>
 ];
 $('.ui.search')
