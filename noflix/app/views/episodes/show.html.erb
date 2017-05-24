@@ -1,4 +1,13 @@
-<h2><%= @tv_show.title %> <i class="chevron right icon"></i> Season <%= @season.number %> <i class="chevron right icon"></i> Episode <%= @episode.number %></h2>
+<h2><%= link_to(tv_show_path(@tv_show), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+    <%= @tv_show.title %>
+    <% end %>
+    <i class="chevron right icon"></i>
+    <%= link_to(season_path(@season), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+    Season <%= @season.number %>
+    <% end %>
+    <i class="chevron right icon"></i>
+    Episode <%= @episode.number %>
+</h2>
 
 <!-- <p id="notice"><%= notice %></p> -->
 
