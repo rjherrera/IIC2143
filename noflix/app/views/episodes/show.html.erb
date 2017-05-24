@@ -25,10 +25,15 @@
       </p>
 
       <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
-          <%= link_to(edit_episode_path(@episode), :class=>"ui labeled icon button teal") do%>
+          <%= link_to(edit_episode_path(@episode), :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
               <i class="edit icon"></i>
               Edit Episode
           <% end %>
+      <% end %>
+      <br>
+      <%= link_to(@episode, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
+          <i class="trash icon"></i>
+          Destroy Episode
       <% end %>
   </div>
   <div class="nine wide column">

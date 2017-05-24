@@ -17,9 +17,14 @@
             <i class="edit icon"></i>
             Edit Season
         <% end %>
-        <%= link_to(new_episode_path(season_id0: @season.id), :class=>"ui labeled icon button teal") do%>
+        <%= link_to(new_episode_path(season_id0: @season.id), :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
             <i class="add circle icon"></i>
             New Episode
+        <% end %>
+        <br>
+        <%= link_to(@season, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
+            <i class="trash icon"></i>
+            Destroy Season
         <% end %>
     <% end %>
 
