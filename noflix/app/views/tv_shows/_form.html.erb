@@ -467,4 +467,10 @@ $("#language-dropdown").on('change', function() {
 $("#category-dropdown").on('change', function() {
     $("#tv_show_category").val($("#category-dropdown").dropdown('get value')[0]);
 });
+// Edit fill
+$(document).ready(function() {
+    $("#country-dropdown").dropdown('set selected', $("#tv_show_country").val());
+    $("#language-dropdown").dropdown('set selected', $("#tv_show_language").val());
+    $("#category-dropdown").dropdown('set selected', $("#tv_show_category").val());
+});
 </script>
