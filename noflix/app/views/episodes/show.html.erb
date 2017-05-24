@@ -10,41 +10,51 @@
         <%= @episode.plot %>
       </p>
 
-      <p>
+      <p style="margin-bottom: 30px;">
         <strong>Duration:</strong>
         <%= @episode.duration.strftime("%M") %> minutes
       </p>
+
+      <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
+          <%= link_to(edit_episode_path(@episode), :class=>"ui labeled icon button teal") do%>
+              <i class="edit icon"></i>
+              Edit Episode
+          <% end %>
+      <% end %>
   </div>
   <div class="nine wide column">
+      <h2 class="ui dividing header" style="color: white;">Reviews</h2>
+
+      <% if @user %>
+      <form class="ui form" style="margin-top: 35px;">
+        <div class="field">
+          <textarea id="review_text" placeholder="Your review..." rows="2"></textarea>
+          <div class="ui huge star rating new-review" style="margin-top: 10px;"></div>
+        </div>
+        <div class="ui teal labeled submit icon button" id="add-review">
+          <i class="icon star"></i> Add Review
+        </div>
+      </form>
+      <% end %>
+      <h2 class="ui dividing header"></h2>
+
       <div class="ui comments">
-        <h2 class="ui dividing header" style="color: white;">Reviews</h2>
-            <% @reviews.each do |review| %>
-            <div class="comment">
-                <!-- <a class="avatar">
-                  <img src="<%= asset_path('steve.jpg') %>"/>
-                </a> -->
-              <div class="content">
-                <a class="author" style="color: white; cursor: text;"><%= review.user.name %></a>
-                <div class="metadata">
-                  <span class="date" style="color: rgba(255, 255, 255, 0.9);"><%= review.created_at.strftime("%d/%m/%Y") %></span>
-                </div>
-                <div class="text" style="color: white;">
-                  <div class="ui tiny star rating review" data-rating="<%= review.stars %>" style="margin-right: 5px;"></div>
-                  <%= review.comment %>
-                </div>
-              </div>
+        <% @reviews.each do |review| %>
+        <div class="comment">
+            <!-- <a class="avatar">
+              <img src="<%= asset_path('steve.jpg') %>"/>
+            </a> -->
+          <div class="content">
+            <a class="author" style="color: white; cursor: text;"><%= review.user.name %></a>
+            <div class="metadata">
+              <span class="date" style="color: rgba(255, 255, 255, 0.9);"><%= review.created_at.strftime("%d/%m/%Y") %></span>
             </div>
-            <% end %>
-        <% if @user %>
-        <form class="ui form" style="margin-top: 35px;">
-          <div class="field">
-            <textarea id="review_text" placeholder="Your review..." rows="2"></textarea>
-            <div class="ui huge star rating new-review" style="margin-top: 10px;"></div>
+            <div class="text" style="color: white;">
+              <div class="ui tiny star rating review" data-rating="<%= review.stars %>" style="margin-right: 5px;"></div>
+              <%= review.comment %>
+            </div>
           </div>
-          <div class="ui teal labeled submit icon button" id="add-review">
-            <i class="icon star"></i> Add Review
-          </div>
-        </form>
+        </div>
         <% end %>
       </div>
   </div>
@@ -79,11 +89,6 @@
       </div>
     <% end %>
 <% end %>
-
-<%= link_to 'Edit', edit_episode_path(@episode) %> |
-<!-- <%= link_to 'Back', episodes_path %> -->
-<%= link_to 'Back', season_path(@season.id) %>
-
 
 <script type="text/javascript">
     // Rating default stars = 5

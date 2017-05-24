@@ -1,7 +1,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="field">
+<div class="field" style="margin-bottom: 20px;">
     <div class="ui search">
       <div class="ui icon input">
         <input class="prompt" type="text" placeholder="TV shows...">
@@ -11,8 +11,10 @@
     </div>
 </div>
 
-<br />
-<%= link_to 'New Tv Show', new_tv_show_path %>
+<%= link_to(new_tv_show_path, :class=>"ui labeled icon button teal") do%>
+    <i class="add circle icon"></i>
+    New TV Show
+<% end %>
 
 <% if @user %>
     <% if @user.is_admin %> <h1>All Private TV Shows</h1>

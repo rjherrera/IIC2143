@@ -2,7 +2,13 @@
 
 <div class="ui tree column grid">
   <div class="six wide column">
-    <img src="<%= asset_path('how.jpg') %>" style="width: 100%;"/>
+    <img src="<%= asset_path('how.jpg') %>" style="width: 100%; margin-bottom: 20px;"/>
+    <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
+        <%= link_to(edit_tv_show_path(@tv_show), :class=>"ui labeled icon button teal") do%>
+            <i class="edit icon"></i>
+            Edit TV Show
+        <% end %>
+    <% end %>
   </div>
   <div class="five wide column">
       <h2><%= @tv_show.title %></h2>
@@ -95,10 +101,3 @@ $("#add-season").click(function(){
     $(".submit-form").click();
 });
 </script>
-
-<% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
-<div class="ui inverted list" style="width:40px">
-  <%= link_to 'Edit', edit_tv_show_path(@tv_show), :class => 'item' %>
-  <!-- <%= link_to 'Back', tv_shows_path, :class => 'item' %> -->
-</div>
-<% end %>
