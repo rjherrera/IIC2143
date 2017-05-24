@@ -450,7 +450,7 @@
 
       <div class="field">
         <label>Subtitles</label>
-        <select multiple="" class="ui dropdown" id="subtitles-dropdown">
+        <select multiple="" class="ui dropdown search" id="subtitles-dropdown">
           <option value="">Select Subtitles</option>
           <% @subtitles.each do |subtitle| %>
           <option value="<%= subtitle.language %>"><%= subtitle.language %></option>
