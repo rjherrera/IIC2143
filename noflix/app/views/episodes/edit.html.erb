@@ -1,4 +1,17 @@
-<h1>Editing Episode</h1>
+<h2><%= link_to(tv_show_path(@tv_show), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+    <%= @tv_show.title %>
+    <% end %>
+    <i class="chevron right icon"></i>
+    <%= link_to(season_path(@season), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+        Season <%= @season.number %>
+    <% end %>
+    <i class="chevron right icon"></i>
+    <%= link_to(episode_path(@episode), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+        Episode <%= @episode.number %>
+    <% end %>
+    <i class="arrow right icon"></i>
+    Edit
+</h2>
 
 <%= render 'form', episode: @episode %>
 

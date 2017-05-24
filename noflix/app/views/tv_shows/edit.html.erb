@@ -1,4 +1,9 @@
-<h1>Editing Tv Show</h1>
+<h1><%= link_to(tv_show_path(@tv_show), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+    <%= @tv_show.title %>
+    <% end %>
+    <i class="arrow right icon"></i>
+    Edit
+</h1>
 
 <%= render 'form', tv_show: @tv_show %>
 
