@@ -63,7 +63,7 @@ class SeasonsController < ApplicationController
   def destroy
     @season.destroy
     respond_to do |format|
-      format.html { redirect_to seasons_url, notice: 'Season was successfully destroyed.' }
+      format.html { redirect_to @season.tv_show, notice: 'Season was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

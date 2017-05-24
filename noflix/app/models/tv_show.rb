@@ -1,7 +1,7 @@
 class TvShow < ApplicationRecord
     attr_accessor :stars_avg
 
-    has_many :seasons, :dependent => :delete_all
+    has_many :seasons, :dependent => :destroy
     belongs_to :director
     has_and_belongs_to_many :actors
     has_many :reviews
