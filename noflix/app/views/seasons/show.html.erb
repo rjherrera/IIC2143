@@ -4,7 +4,15 @@
 
 <div class="ui two column grid">
   <div class="six wide column">
-    <img src="<%= asset_path('how.jpg') %>" style="width: 100%;"/>
+    <img src="<%= asset_path('how.jpg') %>" style="width: 100%; margin-bottom: 20px;"/>
+    <%= link_to(edit_season_path(@season), :class=>"ui labeled icon button teal") do%>
+        <i class="edit icon"></i>
+        Edit Season
+    <% end %>
+    <%= link_to(new_episode_path(season_id0: @season.id), :class=>"ui labeled icon button teal") do%>
+        <i class="add circle icon"></i>
+        New Episode
+    <% end %>
   </div>
 
   <div class="ten wide column">
@@ -29,6 +37,3 @@
   </div>
 
 </div>
-
-<%= link_to 'Edit', edit_season_path(@season) %> |
-<%= link_to 'Back', seasons_path %>
