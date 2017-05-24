@@ -21,6 +21,8 @@ class EpisodesController < ApplicationController
   def new
     @episode = Episode.new
     @episode.season_id = params[:season_id0]
+    @season = Season.find(@episode.season_id)
+    @tv_show = TvShow.find(@season.tv_show_id)
   end
 
   # GET /episodes/1/edit
