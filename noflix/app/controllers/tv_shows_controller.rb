@@ -48,12 +48,16 @@ class TvShowsController < ApplicationController
 
   # GET /tv_shows/new
   def new
+    @user = current_user
     @tv_show = TvShow.new
     @subtitles = Subtitle.all
+    @tv_shows = TvShow.all
   end
 
   # GET /tv_shows/1/edit
   def edit
+    @user = current_user
+    @tv_shows = TvShow.all
     @subtitles = Subtitle.all
     if !current_user.is_admin and current_user.id != @tv_show.user_id
       redirect_to TvShow
@@ -64,9 +68,9 @@ class TvShowsController < ApplicationController
   # POST /tv_shows.json
   def create
     # Director Name
-    name = tv_show_params[:director_id]
+    name = tv_show_params[:director_id].split.map(&:capitalize).join(' ')
     if !Director.exists?(:name => name)
-      Director.create(name: name)
+        Director.create(name: name)
     end
     new_tsp = tv_show_params
     new_tsp[:director_id] = Director.find_by_name(name).id
@@ -101,6 +105,12 @@ class TvShowsController < ApplicationController
   # PATCH/PUT /tv_shows/1.json
   def update
     new_tsp = tv_show_params
+    # Director Name
+    name = tv_show_params[:director_id].split.map(&:capitalize).join(' ')
+    if !Director.exists?(:name => name)
+        Director.create(name: name)
+    end
+    new_tsp[:director_id] = Director.find_by_name(name).id
 
     # Subtitles
     subs_params = tv_show_params[:subtitles]

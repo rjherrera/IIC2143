@@ -437,26 +437,32 @@
   </div>
 
   <div class="field">
-    <%= f.label :director_id %>
-    <%= f.text_field :director_id %>
+      <%= f.label :director_id %>
+      <div class="ui search">
+        <input class="prompt" type="text" placeholder="Steven Spielberg" id="director-search">
+        <div class="results"></div>
+      </div>
   </div>
+
+  <%= f.hidden_field :director_id %>
 
   <div class="field">
     <!-- <%= f.label :owner_id %> -->
     <%= f.hidden_field :user_id, :value => tv_show.user_id %>
   </div>
 
-    <%= f.hidden_field :subtitles, :value => "" %>
+  <div class="field">
+    <label>Subtitles</label>
+    <select multiple="" class="ui dropdown search" id="subtitles-dropdown">
+      <option value="">Select Subtitles</option>
+      <% @subtitles.each do |subtitle| %>
+      <option value="<%= subtitle.language %>"><%= subtitle.language %></option>
+      <% end %>
+    </select>
+  </div>
 
-      <div class="field">
-        <label>Subtitles</label>
-        <select multiple="" class="ui dropdown search" id="subtitles-dropdown">
-          <option value="">Select Subtitles</option>
-          <% @subtitles.each do |subtitle| %>
-          <option value="<%= subtitle.language %>"><%= subtitle.language %></option>
-          <% end %>
-        </select>
-      </div>
+  <%= f.hidden_field :subtitles, :value => "" %>
+
 
   <div class="field">
       <%= f.submit :class => 'ui teal button' %>
@@ -464,10 +470,7 @@
 <% end %>
 
 <script type="text/javascript">
-$('#country-dropdown').dropdown();
-$('#language-dropdown').dropdown();
-$('#category-dropdown').dropdown();
-$('#subtitles-dropdown').dropdown();
+$('.ui.dropdown').dropdown();
 // New TV Show -> country
 $("#country-dropdown").on('change', function() {
     $("#tv_show_country").val($("#country-dropdown").dropdown('get value'));
@@ -487,16 +490,49 @@ $("#subtitles-dropdown").on('change', function() {
     for (i = 0; i < subtitles.length - 1; i++) subs_str += subtitles[i] + ";";
     $("#tv_show_subtitles").val(subs_str);
 });
+// New TV Show -> director
+var content = [];
+<% @tv_shows.each do |t| %>
+    <% if (@user and @user.is_admin) or (@user and @user.id == t.user_id) or (t.user_id == nil) %>
+    var already_exists = content.filter(function ( obj ) { return obj.title === "<%= t.director.name %>"; }).length;
+    if (!already_exists) content.push({ title: "<%= t.director.name %>" });
+    <% end %>
+<% end %>
+$('.ui.search').search({
+    source: content,
+    error: { noResults: "This director doesn\'t exist. We are going to create it!" },
+    onSelect: function(result, response) {
+        $("#tv_show_director_id").val(result.title);
+        return true;
+    }
+});
+$('#director-search').keypress(function (e) {
+    if (e.which == 13) return false;
+});
+$("#director-search").on('change keyup paste', function() {
+    var director_name = $("#director-search").val();
+    $("#tv_show_director_id").val(director_name);
+});
+
 // Edit fill
 $(document).ready(function() {
+    // Country
     $("#country-dropdown").dropdown('set selected', $("#tv_show_country").val());
+    // Language
     $("#language-dropdown").dropdown('set selected', $("#tv_show_language").val());
+    // Category
     $("#category-dropdown").dropdown('set selected', $("#tv_show_category").val());
-
+    // Subtitles
     <% if @tv_show.subtitles %>
         <% @tv_show.subtitles.each do |s| %>
         $("#subtitles-dropdown").dropdown('set selected', "<%= s.language %>");
         <% end %>
+    <% end %>
+    // Director
+    <% if @tv_show.director %>
+        var director_name = "<%= @tv_show.director.name %>";
+        $("#director-search").val(director_name);
+        $("#tv_show_director_id").val(director_name);
     <% end %>
 });
 </script>
