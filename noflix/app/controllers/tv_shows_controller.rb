@@ -43,6 +43,8 @@ class TvShowsController < ApplicationController
     @user = current_user
     @seasons = Season.where(tv_show_id: @tv_show.id).order('number ASC')
     @season = Season.new
+    @articles = Article.where(tv_show_id: @tv_show.id).order('created_at DESC')
+    @article = Article.new
     @subtitles = @tv_show.subtitles;
   end
 

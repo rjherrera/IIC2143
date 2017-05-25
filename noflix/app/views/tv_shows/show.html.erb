@@ -94,7 +94,39 @@
   </div>
 </div>
 
-<%= form_for(@season, :html => {:class => 'ui inverted form'}) do |f| %>
+<div class="ui feed">
+    <h2 class="ui dividing header" style="color: white; margin-top: 40px;">News Feed</h2>
+
+    <% if @user %>
+    <form class="ui form" style="margin-top: 20px;">
+      <div class="field">
+        <textarea id="post_text" placeholder="Your post..." rows="2"></textarea>
+      </div>
+      <div class="ui teal labeled submit icon button" id="add-post">
+        <i class="icon newspaper"></i> Post
+      </div>
+    </form>
+    <% end %>
+    <h2 class="ui dividing header"></h2>
+
+    <% @articles.each do |a| %>
+    <div class="event">
+      <div class="content">
+        <div class="summary">
+          <strong style="color: white;"><%= a.user.name %></strong>
+          <div class="date" style="color: rgba(255, 255, 255, 0.9);">
+            <%= a.created_at.strftime("%d/%m/%Y") %>
+          </div>
+        </div>
+        <div class="text" style="color: white;">
+            <%= a.content %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+</div>
+
+<%= form_for(@season) do |f| %>
   <% if @season.errors.any? %>
     <div id="error_explanation" class="ui negative message">
       <div class="header"><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</div>
@@ -108,8 +140,29 @@
     <%= f.hidden_field :number %>
     <%= f.hidden_field :tv_show_id, :value => @tv_show.id %>
     <div style="display: none;">
-        <%= f.submit :submit, :class => 'submit-form' %>
+        <%= f.submit :submit, :class => 'submit-form' , :id => 'submit-add-season'%>
     </div>
+<% end %>
+
+<% if @user %>
+    <%= form_for(@article) do |f| %>
+      <% if @article.errors.any? %>
+        <div id="error_explanation" class="ui negative message">
+          <div class="header"><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</div>
+          <ul class="list">
+          <% @article.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+        <%= f.hidden_field :content%>
+        <%= f.hidden_field :tv_show_id, :value => @tv_show.id%>
+        <%= f.hidden_field :user_id, :value => @user.id %>
+        <div style="display: none;">
+            <%= f.submit :submit, :class => 'submit-form' , :id => 'submit-add-post'%>
+        </div>
+    <% end %>
 <% end %>
 
 <script type="text/javascript">
@@ -119,6 +172,14 @@ $("#season_n").on('change keyup paste', function() {
 });
 // New Season -> submit
 $("#add-season").click(function(){
-    $(".submit-form").click();
+    $("#submit-add-season").click();
+});
+// New Season -> post
+$("#post_text").on('change keyup paste', function() {
+    $('#article_content').val($("#post_text").val());
+});
+// New Post -> submit
+$("#add-post").click(function(){
+    $("#submit-add-post").click();
 });
 </script>

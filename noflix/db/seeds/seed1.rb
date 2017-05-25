@@ -1,3 +1,6 @@
+# --- Users ---
+admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true
+user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123'
 
 # --- Directors ---
 directors_list = [
