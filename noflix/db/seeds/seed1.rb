@@ -323,15 +323,10 @@ end
 
 
 # --- Subtitles ---
-subtitles_list = [
-    "Spanish",
-    "French",
-    "Italian",
-    "German",
-    "English"
-]
-subtitles_list.each do |language|
-  Subtitle.create( language: language)
+File.open("db/seeds/subtitles.txt", "r") do |f|
+  f.each_line do |l|
+    Subtitle.create( language: l.gsub("\n", ""))
+  end
 end
 
 himym.subtitles << Subtitle.find_by_language("Spanish")
