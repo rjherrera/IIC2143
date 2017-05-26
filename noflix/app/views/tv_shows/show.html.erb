@@ -4,11 +4,13 @@
   <div class="six wide column">
     <img src="<%= asset_path('how.jpg') %>" style="width: 100%; margin-bottom: 20px;"/>
     <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
-        <%= link_to(edit_tv_show_path(@tv_show), :class => "ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
-            <i class="edit icon"></i>
-            Edit TV Show
-        <% end %>
+        <!-- Edit -->
+            <%= link_to(edit_tv_show_path(@tv_show), :class => "ui labeled icon button teal field", :style => "margin-bottom:15px;") do%>
+                <i class="edit icon"></i>
+                Edit TV Show
+            <% end %>
         <br>
+        <!-- Destroy -->
         <%= link_to(@tv_show, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
             <i class="trash icon"></i>
             Destroy TV Show
