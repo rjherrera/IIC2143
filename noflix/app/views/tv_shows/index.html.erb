@@ -62,6 +62,7 @@
                           <div class="content">
                             <div class="header"><%= tv_show.title %></div>
                             <div class="meta"><%= tv_show.start_year %></div>
+                            <div class="meta"><%= tv_show.seasons.count %></div>
                           </div>
                           <div class="extra content">
                             <% if tv_show.stars_avg != "-" %>
@@ -87,6 +88,7 @@
                   <div class="content">
                     <div class="header"><%= private_tv_show.title %></div>
                     <div class="meta"><%= private_tv_show.start_year %></div>
+                    <div class="meta"><%= private_tv_show.seasons.count %></div>
                   </div>
                   <div class="extra content">
                     <% if private_tv_show.stars_avg != "-" %>
@@ -113,6 +115,7 @@
                   <div class="content">
                     <div class="header"><%= tv_show.title %></div>
                     <div class="meta"><%= tv_show.start_year %></div>
+                    <div class="meta"><%= tv_show.seasons.count %> seasons</div>
                   </div>
                   <div class="extra content">
                     <% if tv_show.stars_avg != "-" %>
