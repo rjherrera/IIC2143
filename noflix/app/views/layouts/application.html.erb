@@ -13,6 +13,11 @@
       <div class="ui container">
         <%= link_to('noFLIX', root_path, class: 'item', id: 'logo') %>
         <div class="right menu">
+          <% if current_user %>
+            <%= link_to(administrator_path(current_user.id), class: 'item') do %>
+            Admin
+            <% end %>
+          <% end %>
           <%= render 'devise/menu/registration_items' %>
           <%= render 'devise/menu/login_items' %>
         </div>

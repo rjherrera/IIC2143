@@ -1,0 +1,20 @@
+<h1>Users</h1>
+<div class="ui middle aligned celled list" style="width: 60%;">
+  <% @users.each do |user| %>
+  <div class="item" style="margin-bottom: 5px;">
+      <div class="right floated content">
+        <% if user.is_admin %>
+        <div class="ui button blue">Remove administrator privileges</div>
+        <% else %>
+        <div class="ui button green">Give administrator privileges</div>
+        <% end %>
+        <div class="ui button negative">Destroy</div>
+      </div>
+    <i class="large user middle aligned icon"></i>
+    <div class="content">
+      <div class="header" style="color:white;"><%= user.name %></div>
+      <div class="description" style="color:rgba(255, 255, 255, 0.9);"><%= user.email %></div>
+    </div>
+  </div>
+  <% end %>
+</div>

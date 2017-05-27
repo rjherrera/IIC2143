@@ -4,7 +4,7 @@ class SubtitlesController < ApplicationController
   # GET /subtitles
   # GET /subtitles.json
   def index
-    @subtitles = Subtitle.all
+    @subtitles = Subtitle.all.order("language ASC")
   end
 
   # GET /subtitles/1
