@@ -16,7 +16,7 @@ class TvShowsController < ApplicationController
             end
         end
     end
-    @tv_shows = TvShow.all
+    @tv_shows = TvShow.all.order('start_year DESC')
     @tv_shows.each do |tv_show|
         stars_avg = Review.where(tv_show_id: tv_show.id).average(:stars)
         if stars_avg != nil
