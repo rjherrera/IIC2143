@@ -340,3 +340,7 @@ twd.subtitles << Subtitle.find_by_language("Italian")
 st.subtitles << Subtitle.find_by_language("English")
 st.subtitles << Subtitle.find_by_language("Spanish")
 hoc.subtitles << Subtitle.find_by_language("English")
+
+user.viewed_episodes << Episode.find(1)
+user.viewed_episodes << Episode.find(2)
+user.viewed_episodes << Episode.find(3)

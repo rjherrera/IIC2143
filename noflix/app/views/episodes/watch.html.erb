@@ -1,0 +1,27 @@
+<div class="ui one column centered grid">
+  <div class="sixteen wide column" style="text-align:center;">
+    <h3>You watched:</h3>
+    <h2><%= link_to(tv_show_path(@tv_show), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+        <%= @tv_show.title %>
+        <% end %>
+        <i class="chevron right icon"></i>
+        <%= link_to(season_path(@season), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+        Season <%= @season.number %>
+        <% end %>
+        <i class="chevron right icon"></i>
+        <%= link_to(episode_path(@episode), :style => "color: rgba(255, 255, 255, 0.9);") do %>
+        Episode <%= @episode.number %>
+        <% end %>
+    </h2>
+  </div>
+</div>
+
+<div class="ui one column centered grid">
+  <div class="six wide column" style="text-align:center;">
+    <img src="<%= asset_path('how.jpg') %>" style="width: 100%; margin-bottom: 20px;"/>
+    <%= link_to(@episode, :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
+        <i class="arrow left icon"></i>
+        Back
+    <% end %>
+  </div>
+</div>

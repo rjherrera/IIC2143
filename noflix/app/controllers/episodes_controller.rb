@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :edit, :update, :destroy]
+  before_action :set_episode, only: [:show, :edit, :watch, :update, :destroy]
 
   # GET /episodes
   # GET /episodes.json
@@ -15,6 +15,7 @@ class EpisodesController < ApplicationController
     @reviews = Review.where(episode_id: @episode.id).order('created_at DESC')
     @review = Review.new
     @user = current_user
+    @viewed = current_user.viewed_episodes.where(:id => @episode.id).count
   end
 
   # GET /episodes/new
@@ -29,6 +30,14 @@ class EpisodesController < ApplicationController
   def edit
     @season = Season.find(@episode.season_id)
     @tv_show = TvShow.find(@season.tv_show_id)
+  end
+
+  # GET /episodes/1/watch
+  def watch
+    @user = current_user
+    @season = Season.find(@episode.season_id)
+    @tv_show = TvShow.find(@season.tv_show_id)
+    @user.viewed_episodes << @episode
   end
 
   # POST /episodes

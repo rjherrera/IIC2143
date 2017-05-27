@@ -13,15 +13,15 @@
 
     <!-- Solo pueden editar y agregar capitulos: admin y owners -->
     <% if @user and (@user.is_admin or @user.id == @tv_show.user_id) %>
-        <%= link_to(edit_season_path(@season), :class=>"ui labeled icon button teal") do%>
-            <i class="edit icon"></i>
-            Edit Season
-        <% end %>
-        <%= link_to(new_episode_path(season_id0: @season.id), :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
+        <%= link_to(new_episode_path(season_id0: @season.id), :class=>"ui labeled icon button primary", :style => "margin-bottom:15px;") do%>
             <i class="add circle icon"></i>
             New Episode
         <% end %>
         <br>
+        <%= link_to(edit_season_path(@season), :class=>"ui labeled icon button teal") do%>
+            <i class="edit icon"></i>
+            Edit Season
+        <% end %>
         <%= link_to(@season, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
             <i class="trash icon"></i>
             Destroy Season

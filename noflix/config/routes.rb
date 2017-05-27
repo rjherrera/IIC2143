@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :reviews
   resources :directors
   resources :actors
-  resources :episodes
+  resources :episodes do
+      get :watch, on: :member
+  end
   resources :seasons
   resources :articles
   # registrations para agregar nombre al registro de usuarios

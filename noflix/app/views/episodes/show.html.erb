@@ -23,17 +23,26 @@
         <strong>Duration:</strong>
         <%= @episode.duration.strftime("%M") %> minutes
       </p>
-
+      <% if @user %>
+          <% if @viewed == 0 %>
+              <%= link_to(watch_episode_path(@episode), :class=>"ui labeled icon button primary", :style => "margin-bottom:15px;") do%>
+                  <i class="unhide icon"></i>
+                  Watch Episode
+              <% end %>
+          <% else %>
+          <div class="ui green message" style="width: 60%;">You've already watched this chapter!</div>
+          <% end %>
+          <br>
+      <% end %>
       <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
           <%= link_to(edit_episode_path(@episode), :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
               <i class="edit icon"></i>
               Edit Episode
           <% end %>
-      <% end %>
-      <br>
-      <%= link_to(@episode, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
-          <i class="trash icon"></i>
-          Destroy Episode
+          <%= link_to(@episode, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui labeled icon button negative") do %>
+              <i class="trash icon"></i>
+              Destroy Episode
+          <% end %>
       <% end %>
   </div>
   <div class="nine wide column">

@@ -1,6 +1,6 @@
 class TvShowsController < ApplicationController
-  before_action :set_tv_show, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_tv_show, only: [:show, :edit, :view, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :view, :update, :destroy]
 
   # GET /tv_shows
   # GET /tv_shows.json
