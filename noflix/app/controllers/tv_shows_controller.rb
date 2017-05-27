@@ -16,7 +16,7 @@ class TvShowsController < ApplicationController
             end
         end
     end
-    @tv_shows = TvShow.all
+    @tv_shows = TvShow.all.order('start_year DESC')
     @tv_shows.each do |tv_show|
         stars_avg = Review.where(tv_show_id: tv_show.id).average(:stars)
         if stars_avg != nil
@@ -53,6 +53,7 @@ class TvShowsController < ApplicationController
     @user = current_user
     @tv_show = TvShow.new
     @subtitles = Subtitle.all
+    @actors = Actor.all
     @tv_shows = TvShow.all
   end
 
@@ -61,6 +62,7 @@ class TvShowsController < ApplicationController
     @user = current_user
     @tv_shows = TvShow.all
     @subtitles = Subtitle.all
+    @actors = Actor.all
     if !current_user.is_admin and current_user.id != @tv_show.user_id
       redirect_to TvShow
     end
@@ -81,9 +83,21 @@ class TvShowsController < ApplicationController
     subs_params = tv_show_params[:subtitles]
     new_subtitles = []
     subs_params.split(";").each do |s|
-        new_subtitles << Subtitle.find_by_language(s)
+        if Subtitle.find_by_language(s)
+            new_subtitles << Subtitle.find_by_language(s)
+        end
     end
     new_tsp[:subtitles] = new_subtitles
+
+    # Actors
+    actors_params = tv_show_params[:actors]
+    new_actors = []
+    actors_params.split(";").each do |a|
+        if Actor.find_by_name(a)
+            new_actors << Actor.find_by_name(a)
+        end
+    end
+    new_tsp[:actors] = new_actors
 
     new_tsp[:user_id] = current_user.id
     @tv_show = TvShow.new(new_tsp)
@@ -124,6 +138,16 @@ class TvShowsController < ApplicationController
     end
     new_tsp[:subtitles] = new_subtitles
 
+    # Actors
+    actors_params = tv_show_params[:actors]
+    new_actors = []
+    actors_params.split(";").each do |a|
+        if Actor.find_by_name(a)
+            new_actors << Actor.find_by_name(a)
+        end
+    end
+    new_tsp[:actors] = new_actors
+
     respond_to do |format|
       if @tv_show.update(new_tsp)
         format.html { redirect_to @tv_show, notice: 'Tv show was successfully updated.' }
@@ -153,6 +177,6 @@ class TvShowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tv_show_params
-      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles)
+      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles, :actors)
     end
 end

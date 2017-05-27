@@ -417,9 +417,7 @@
     </select>
   </div>
 
-  <div class="field">
-    <%= f.hidden_field :category %>
-  </div>
+  <%= f.hidden_field :category %>
 
   <div class="field">
     <%= f.label :start_year %>
@@ -445,6 +443,18 @@
   </div>
 
   <%= f.hidden_field :director_id %>
+
+  <div class="field">
+    <label>Actors</label>
+    <select multiple="" class="ui dropdown search" id="actors-dropdown">
+      <option value="">Select Actors</option>
+      <% @actors.each do |actor| %>
+      <option value="<%= actor.name %>"><%= actor.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <%= f.hidden_field :actors, :value => "" %>
 
   <div class="field">
     <!-- <%= f.label :owner_id %> -->
@@ -490,6 +500,13 @@ $("#subtitles-dropdown").on('change', function() {
     for (i = 0; i < subtitles.length - 1; i++) subs_str += subtitles[i] + ";";
     $("#tv_show_subtitles").val(subs_str);
 });
+// New TV Show -> actors
+$("#actors-dropdown").on('change', function() {
+    var subtitles = $("#actors-dropdown").dropdown('get value');
+    var subs_str = "";
+    for (i = 0; i < subtitles.length - 1; i++) subs_str += subtitles[i] + ";";
+    $("#tv_show_actors").val(subs_str);
+});
 // New TV Show -> director
 var content = [];
 <% @tv_shows.each do |t| %>
@@ -526,6 +543,12 @@ $(document).ready(function() {
     <% if @tv_show.subtitles %>
         <% @tv_show.subtitles.each do |s| %>
         $("#subtitles-dropdown").dropdown('set selected', "<%= s.language %>");
+        <% end %>
+    <% end %>
+    // Actors
+    <% if @tv_show.actors %>
+        <% @tv_show.actors.each do |a| %>
+        $("#actors-dropdown").dropdown('set selected', "<%= a.name %>");
         <% end %>
     <% end %>
     // Director

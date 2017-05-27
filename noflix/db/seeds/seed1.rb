@@ -285,13 +285,13 @@ actors_pb.each do |name|
 end
 
 actors_twd = [
-    "Andrew Lincolnoln",
-    "Chandler Riggsggs",
-    "Norman Reedusus",
-    "Melissa McBrideride",
-    "Lauren Cohann",
+    "Andrew Lincoln",
+    "Chandler Riggs",
+    "Norman Reedus",
+    "Melissa McBrider",
+    "Lauren Cohan",
     "Steven Yeun",
-    "Danai Guriraa"
+    "Danai Gurira"
 ]
 actors_twd.each do |name|
   Actor.create(name: name)
