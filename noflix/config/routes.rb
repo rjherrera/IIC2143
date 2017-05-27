@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :episodes
   resources :seasons
   resources :articles
-  devise_for :users
+  # registrations para agregar nombre al registro de usuarios
+  devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
 end
