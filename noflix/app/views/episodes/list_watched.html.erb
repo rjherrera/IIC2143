@@ -1,0 +1,18 @@
+<h1>Watched Episodes</h1>
+
+<div class="ui list">
+  <% @user.viewed_episodes.each do |episode| %>
+    <div class="item">
+      <i class="film icon"></i>
+      <div class="content">
+        <div class="header" style="color: white;">
+            <%= episode.season.tv_show.title %>
+            <i class="caret right icon"></i>
+            Season <%= episode.season.number %>
+            <i class="caret right icon"></i>
+            Episode <%= episode.number %>:  <%= episode.title %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

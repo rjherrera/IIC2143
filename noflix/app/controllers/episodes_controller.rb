@@ -42,6 +42,11 @@ class EpisodesController < ApplicationController
     @user.viewed_episodes << @episode
   end
 
+  # GET /episodes/1/list_watched
+  def list_watched
+    @user = current_user
+  end
+
   # POST /episodes
   # POST /episodes.json
   def create

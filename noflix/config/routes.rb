@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :actors
   resources :episodes do
       get :watch, on: :member
+      get :list_watched, on: :member
   end
   resources :seasons
   resources :articles

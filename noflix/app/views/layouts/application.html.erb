@@ -15,7 +15,12 @@
         <div class="right menu">
           <% if current_user and current_user.is_admin %>
             <%= link_to(administrator_path(current_user.id), class: 'item') do %>
-            Admin
+            <strong>Admin</strong>
+            <% end %>
+          <% end %>
+          <% if current_user and !current_user.is_admin %>
+            <%= link_to(list_watched_episode_path(1), class: 'item') do %>
+            <strong>Watched Episodes</strong>
             <% end %>
           <% end %>
           <%= render 'devise/menu/registration_items' %>
