@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   # Admin Dashboard Index
   resources :administrators do
       get :list_users, on: :member
+      get :set_admin, on: :member
+      get :remove_admin, on: :member
   end
 end

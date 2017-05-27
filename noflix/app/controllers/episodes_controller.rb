@@ -15,7 +15,9 @@ class EpisodesController < ApplicationController
     @reviews = Review.where(episode_id: @episode.id).order('created_at DESC')
     @review = Review.new
     @user = current_user
-    @viewed = current_user.viewed_episodes.where(:id => @episode.id).count
+    if current_user
+        @viewed = current_user.viewed_episodes.where(:id => @episode.id).count
+    end
   end
 
   # GET /episodes/new

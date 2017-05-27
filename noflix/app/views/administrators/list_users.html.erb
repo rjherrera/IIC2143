@@ -4,9 +4,13 @@
   <div class="item" style="margin-bottom: 5px;">
       <div class="right floated content">
         <% if user.is_admin %>
-        <div class="ui button blue">Remove administrator privileges</div>
+            <%= link_to(remove_admin_administrator_path(user), :class=>"ui button blue") do%>
+                Remove administrator privileges
+            <% end %>
         <% else %>
-        <div class="ui button green">Give administrator privileges</div>
+            <%= link_to(set_admin_administrator_path(user), :class=>"ui button green") do%>
+                Give administrator privileges
+            <% end %>
         <% end %>
         <div class="ui button negative">Destroy</div>
       </div>
