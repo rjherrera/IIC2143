@@ -6,13 +6,24 @@
     <i class="user icon"></i> New Director
 <% end %>
 
-<div class="ui middle aligned celled list" style="width: 50%;">
+<div class="ui middle aligned celled list" style="width: 60%;">
   <% @directors.each do |director| %>
   <div class="item" style="margin-bottom: 5px; border-top: 1px solid rgba(255, 255, 255, 0.1)">
       <div class="right floated content">
           <!-- <%= link_to(director_path(director), :class => "ui left floated small teal labeled icon button") do %>
               <i class="television icon"></i> Show
           <% end %> -->
+          <% if @user %>
+            <% if !@user.favourite_directors.exists?(director.id) %>
+              <%= link_to(directors_path(:fav => director.id), method: :post, :class => "ui left floated small green labeled icon button") do %>
+                  <i class="edit icon"></i> Favourite
+              <% end %>
+            <% else %>
+              <%= link_to(directors_path(:fav => director.id), method: :post, :class => "ui left floated small teal labeled icon button") do %>
+                  <i class="edit icon"></i> Un-Favourite
+              <% end %>
+            <% end %>
+          <% end %>
           <%= link_to(edit_director_path(director), :class => "ui left floated small primary labeled icon button") do %>
               <i class="edit icon"></i> Edit
           <% end %>

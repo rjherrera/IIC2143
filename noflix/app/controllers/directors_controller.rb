@@ -1,9 +1,20 @@
 class DirectorsController < ApplicationController
   before_action :set_director, only: [:show, :edit, :update, :destroy]
 
+  # Make favourite_users
+  def favouritize
+    @director = Director.find(params[:fav])
+    if !@user.favourite_directors.exists?(@director.id)
+      @user.favourite_directors << @director
+    else
+      @user.favourite_directors.delete(@director.id)
+    end
+  end
+
   # GET /directors
   # GET /directors.json
   def index
+    @user = current_user
     @directors = Director.all.order("name ASC")
   end
 
@@ -24,15 +35,22 @@ class DirectorsController < ApplicationController
   # POST /directors
   # POST /directors.json
   def create
-    @director = Director.new(director_params)
+    @user = current_user
+    if params[:fav]
+      favouritize
+      redirect_to :back
+    else
 
-    respond_to do |format|
-      if @director.save
-        format.html { redirect_to @director, notice: 'Director was successfully created.' }
-        format.json { render :show, status: :created, location: @director }
-      else
-        format.html { render :new }
-        format.json { render json: @director.errors, status: :unprocessable_entity }
+      @director = Director.new(director_params)
+
+      respond_to do |format|
+        if @director.save
+          format.html { redirect_to @director, notice: 'Director was successfully created.' }
+          format.json { render :show, status: :created, location: @director }
+        else
+          format.html { render :new }
+          format.json { render json: @director.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

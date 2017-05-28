@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426215523) do
+ActiveRecord::Schema.define(version: 20170528183226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 20170426215523) do
   create_table "episodes_users", id: false, force: :cascade do |t|
     t.integer "user_id",    null: false
     t.integer "episode_id", null: false
+  end
+
+  create_table "favourite_directors", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "director_id"
+    t.index ["director_id"], name: "index_favourite_directors_on_director_id", using: :btree
+    t.index ["user_id"], name: "index_favourite_directors_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
