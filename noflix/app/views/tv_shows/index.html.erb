@@ -49,6 +49,18 @@
         New TV Show
     <% end %>
 <% end %>
+<% if @filter_category %>
+    <% if !@user.favourite_categories.include?(@filter_category) %>
+        <%= link_to(tv_shows_path(:fav => @filter_category), method: :post, :class=>"ui labeled icon button green") do%>
+            <i class="add circle icon"></i> Favourite
+        <% end %>
+    <% else %>
+        <%= link_to(tv_shows_path(:fav => @filter_category), method: :post, :class=>"ui labeled icon button yellow") do%>
+            <i class="add circle icon"></i> Un-Favourite
+        <% end %>
+    <% end %>
+
+<% end %>
 
 <% if @user %>
     <% if @user.is_admin %> <h1>All Private TV Shows</h1>

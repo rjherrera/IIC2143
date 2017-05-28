@@ -11,4 +11,12 @@ class User < ApplicationRecord
   has_and_belongs_to_many :viewed_episodes, class_name: "Episode"
   has_and_belongs_to_many :favourite_directors, class_name: "Director",
     join_table: "favourite_directors"
+
+  def add_fav_cat(cat)
+    update_attributes favourite_categories: self.favourite_categories + [cat]
+  end
+
+  def remove_fav_cat(cat)
+    update_attributes favourite_categories: self.favourite_categories - [cat]
+  end
 end
