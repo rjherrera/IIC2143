@@ -5,6 +5,8 @@ class TvShowsController < ApplicationController
   # GET /tv_shows
   # GET /tv_shows.json
   def index
+    @categories = Category.all
+
     @user = current_user
     if @user
         if @user.is_kid
