@@ -177,6 +177,9 @@ $("#season_n").on('change keyup paste', function() {
 // New Season -> submit
 $("#add-season").click(function(){
     if ($("#season_n").val() != "") {
+        <% @tv_show.seasons.each do |season| %>
+        if (<%= season.number %> == $("#season_n").val()) return;
+        <% end %>
         $("#submit-add-season").click();
     }
 });
