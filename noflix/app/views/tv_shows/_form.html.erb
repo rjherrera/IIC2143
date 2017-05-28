@@ -389,35 +389,16 @@
   </div>
 
   <div class="field">
-  <%= f.label :category %>
-    <select class="ui search dropdown" id="category-dropdown" name="category">
-        <option value="">Category</option>
-        <option value="Action">Action</option>
-        <option value="Adventure">Adventure</option>
-        <option value="Animation">Animation</option>
-        <option value="Biography">Biography</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Crime">Crime</option>
-        <option value="Documentary">Documentary</option>
-        <option value="Drama">Drama</option>
-        <option value="Family">Family</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="Film-Noir">Film-Noir</option>
-        <option value="History">History</option>
-        <option value="Horror">Horror</option>
-        <option value="Music">Music</option>
-        <option value="Musical">Musical</option>
-        <option value="Mystery">Mystery</option>
-        <option value="Romance">Romance</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Sport">Sport</option>
-        <option value="Thriller">Thriller</option>
-        <option value="War">War</option>
-        <option value="Western">Western</option>
+    <label>Categories</label>
+    <select multiple="" class="ui dropdown search" id="categories-dropdown">
+      <option value="">Select Categories</option>
+      <% @categories.each do |category| %>
+      <option value="<%= category.label %>"><%= category.label %></option>
+      <% end %>
     </select>
   </div>
 
-  <%= f.hidden_field :category %>
+  <%= f.hidden_field :categories, :value => "" %>
 
   <div class="field">
     <%= f.label :start_year %>
@@ -489,16 +470,19 @@ $("#country-dropdown").on('change', function() {
 $("#language-dropdown").on('change', function() {
     $("#tv_show_language").val($("#language-dropdown").dropdown('get value')[0]);
 });
-// New TV Show -> category
-$("#category-dropdown").on('change', function() {
-    $("#tv_show_category").val($("#category-dropdown").dropdown('get value')[0]);
-});
 // New TV Show -> subtitles
 $("#subtitles-dropdown").on('change', function() {
     var subtitles = $("#subtitles-dropdown").dropdown('get value');
     var subs_str = "";
     for (i = 0; i < subtitles.length - 1; i++) subs_str += subtitles[i] + ";";
     $("#tv_show_subtitles").val(subs_str);
+});
+// New TV Show -> categories
+$("#categories-dropdown").on('change', function() {
+    var categories = $("#categories-dropdown").dropdown('get value');
+    var cats_str = "";
+    for (i = 0; i < categories.length - 1; i++) cats_str += categories[i] + ";";
+    $("#tv_show_categories").val(cats_str);
 });
 // New TV Show -> actors
 $("#actors-dropdown").on('change', function() {
@@ -537,12 +521,16 @@ $(document).ready(function() {
     $("#country-dropdown").dropdown('set selected', $("#tv_show_country").val());
     // Language
     $("#language-dropdown").dropdown('set selected', $("#tv_show_language").val());
-    // Category
-    $("#category-dropdown").dropdown('set selected', $("#tv_show_category").val());
     // Subtitles
     <% if @tv_show.subtitles %>
         <% @tv_show.subtitles.each do |s| %>
         $("#subtitles-dropdown").dropdown('set selected', "<%= s.language %>");
+        <% end %>
+    <% end %>
+    // Categories
+    <% if @tv_show.categories %>
+        <% @tv_show.categories.each do |c| %>
+        $("#categories-dropdown").dropdown('set selected', "<%= c.label %>");
         <% end %>
     <% end %>
     // Actors
@@ -568,7 +556,6 @@ $('.ui.form')
       title : 'empty',
       language : 'empty',
       country : 'empty',
-      category : 'empty',
       start_year : 'empty',
       plot : 'empty',
       director : 'empty'

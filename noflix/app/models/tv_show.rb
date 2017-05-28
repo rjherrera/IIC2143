@@ -7,12 +7,12 @@ class TvShow < ApplicationRecord
     has_many :reviews, :dependent => :destroy
     has_many :articles, :dependent => :destroy
     has_and_belongs_to_many :subtitles
+    has_and_belongs_to_many :categories
     belongs_to :private_user, optional: true, class_name: "User"
 
     validates :title, presence: true
     validates :language, presence: true
     validates :country, presence: true
-    validates :category, presence: true
     validates :start_year, presence: true
     validates :plot, presence: true
     validates :director_id, presence: true
