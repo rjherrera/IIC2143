@@ -27,12 +27,12 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     respond_to do |format|
+      tv_show = TvShow.find(@article.tv_show_id)
       if @article.save
-        tv_show = TvShow.find(@article.tv_show_id)
         format.html { redirect_to tv_show, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
-        format.html { render :new }
+        format.html { redirect_to tv_show, notice: 'Article content can\'t be blank.' }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
@@ -42,11 +42,12 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
+      tv_show = TvShow.find(@article.tv_show_id)
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit }
+        format.html { redirect_to tv_show, notice: 'Article content can\'t be blank.' }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end

@@ -14,12 +14,12 @@
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :"data-validate" => 'title' %>
   </div>
 
   <div class="field">
   <%= f.label :language %>
-    <select class="ui search dropdown" id="language-dropdown">
+    <select class="ui search dropdown" id="language-dropdown" name="language">
         <option value="">Language</option>
         <option value="Afrikaans">Afrikaans</option>
         <option value="Albanian">Albanian</option>
@@ -390,7 +390,7 @@
 
   <div class="field">
   <%= f.label :category %>
-    <select class="ui search dropdown" id="category-dropdown">
+    <select class="ui search dropdown" id="category-dropdown" name="category">
         <option value="">Category</option>
         <option value="Action">Action</option>
         <option value="Adventure">Adventure</option>
@@ -421,7 +421,7 @@
 
   <div class="field">
     <%= f.label :start_year %>
-    <%= f.number_field :start_year %>
+    <%= f.number_field :start_year, :"data-validate" => 'start_year'  %>
   </div>
 
   <div class="field">
@@ -431,13 +431,13 @@
 
   <div class="field">
     <%= f.label :plot %>
-    <%= f.text_area :plot %>
+    <%= f.text_area :plot, :"data-validate" => 'plot' %>
   </div>
 
   <div class="field">
       <%= f.label :director_id %>
       <div class="ui search">
-        <input class="prompt" type="text" placeholder="Steven Spielberg" id="director-search">
+        <input class="prompt" type="text" placeholder="Steven Spielberg" id="director-search" name="director">
         <div class="results"></div>
       </div>
   </div>
@@ -558,4 +558,21 @@ $(document).ready(function() {
         $("#tv_show_director_id").val(director_name);
     <% end %>
 });
+</script>
+
+<!-- Validation -->
+<script type="text/javascript">
+$('.ui.form')
+  .form({
+    fields: {
+      title : 'empty',
+      language : 'empty',
+      country : 'empty',
+      category : 'empty',
+      start_year : 'empty',
+      plot : 'empty',
+      director : 'empty'
+    }
+  })
+;
 </script>

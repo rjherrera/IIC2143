@@ -14,22 +14,22 @@
 
   <div class="field">
     <%= f.label :number %>
-    <%= f.number_field :number %>
+    <%= f.number_field :number, :"data-validate" => 'number' %>
   </div>
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :"data-validate" => 'title'  %>
   </div>
 
   <div class="field">
     <%= f.label :duration %>
-    <%= f.time_field :duration%>
+    <%= f.time_field :duration, :"data-validate" => 'duration' %>
   </div>
 
   <div class="field">
     <%= f.label :plot %>
-    <%= f.text_area :plot %>
+    <%= f.text_area :plot, :"data-validate" => 'plot'  %>
   </div>
 
   <div class="field">
@@ -41,3 +41,16 @@
       <%= f.submit :class => 'ui teal button' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$('.ui.form')
+  .form({
+    fields: {
+      number : 'empty',
+      title : 'empty',
+      duration : 'empty',
+      plot : 'empty'
+    }
+  })
+;
+</script>

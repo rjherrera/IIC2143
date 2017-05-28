@@ -77,7 +77,7 @@
     <h3>Seasons</h3>
     <% if @user and ((@user.is_admin) or (@user.id == @tv_show.user_id)) %>
     <div class="ui action input" style="margin-bottom: 40px;">
-      <input type="number" placeholder="Season Number" id="season_n">
+      <input type="number" placeholder="Season Number" id="season_n" name="number">
       <button class="ui button teal" id="add-season">Add Season</button>
     </div>
     <% end %>
@@ -144,7 +144,7 @@
     <%= f.hidden_field :number %>
     <%= f.hidden_field :tv_show_id, :value => @tv_show.id %>
     <div style="display: none;">
-        <%= f.submit :submit, :class => 'submit-form' , :id => 'submit-add-season'%>
+        <%= f.submit :submit, :class => 'submit-form' , :id => 'submit-add-season' %>
     </div>
 <% end %>
 
@@ -176,7 +176,9 @@ $("#season_n").on('change keyup paste', function() {
 });
 // New Season -> submit
 $("#add-season").click(function(){
-    $("#submit-add-season").click();
+    if ($("#season_n").val() != "") {
+        $("#submit-add-season").click();
+    }
 });
 // New Season -> post
 $("#post_text").on('change keyup paste', function() {
