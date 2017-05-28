@@ -111,63 +111,80 @@ class TvShowsController < ApplicationController
     end
   end
 
+  def favouritize
+    @user = current_user
+    if @user.favourite_categories.include?(params[:fav])
+      @user.remove_fav_cat(params[:fav])
+    else
+      @user.add_fav_cat(params[:fav])
+    end
+
+
+  end
+
   # POST /tv_shows
   # POST /tv_shows.json
   def create
-    # Director Name
-    name = tv_show_params[:director_id].split.map(&:capitalize).join(' ')
-    if !Director.exists?(:name => name)
+    if params[:fav]
+      favouritize
+      redirect_to :back
+    else
+      # Director Name
+      name = tv_show_params[:director_id].split.map(&:capitalize).join(' ')
+      if !Director.exists?(:name => name)
         Director.create(name: name)
-    end
-    new_tsp = tv_show_params
-    new_tsp[:director_id] = Director.find_by_name(name).id
+      end
+      new_tsp = tv_show_params
+      new_tsp[:director_id] = Director.find_by_name(name).id
 
-    # Subtitles
-    subs_params = tv_show_params[:subtitles]
-    new_subtitles = []
-    subs_params.split(";").each do |s|
+      # Subtitles
+      subs_params = tv_show_params[:subtitles]
+      new_subtitles = []
+      subs_params.split(";").each do |s|
         if Subtitle.find_by_language(s)
-            new_subtitles << Subtitle.find_by_language(s)
+          new_subtitles << Subtitle.find_by_language(s)
         end
-    end
-    new_tsp[:subtitles] = new_subtitles
+      end
+      new_tsp[:subtitles] = new_subtitles
 
-    # Categories
-    cats_params = tv_show_params[:categories]
-    new_categories = []
-    cats_params.split(";").each do |c|
-        if Category.find_by_label(c)
-            new_categories << Category.find_by_label(c)
-        end
-    end
-    new_tsp[:categories] = new_categories
+      # Categories
+      cats_params = tv_show_params[:categories]
+      new_categories = []
+      cats_params.split(";").each do |c|
+          if Category.find_by_label(c)
+              new_categories << Category.find_by_label(c)
+          end
+      end
+      new_tsp[:categories] = new_categories
 
-    # Actors
-    actors_params = tv_show_params[:actors]
-    new_actors = []
-    actors_params.split(";").each do |a|
+      # Actors
+      actors_params = tv_show_params[:actors]
+      new_actors = []
+      actors_params.split(";").each do |a|
         if Actor.find_by_name(a)
-            new_actors << Actor.find_by_name(a)
+          new_actors << Actor.find_by_name(a)
         end
-    end
-    new_tsp[:actors] = new_actors
+      end
+      new_tsp[:actors] = new_actors
 
-    new_tsp[:user_id] = current_user.id
-    @tv_show = TvShow.new(new_tsp)
+      new_tsp[:user_id] = current_user.id
+      @tv_show = TvShow.new(new_tsp)
 
-    if current_user.is_admin
-      @tv_show.user_id = nil
-    end
+      if current_user.is_admin
+        @tv_show.user_id = nil
+      end
 
-    respond_to do |format|
-      if @tv_show.save
-        format.html { redirect_to @tv_show, notice: 'Tv show was successfully created.' }
-        format.json { render :show, status: :created, location: @tv_show }
-      else
-        format.html { render :new }
-        format.json { render json: @tv_show.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @tv_show.save
+          format.html { redirect_to @tv_show, notice: 'Tv show was successfully created.' }
+          format.json { render :show, status: :created, location: @tv_show }
+        else
+          format.html { render :new }
+          format.json { render json: @tv_show.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PATCH/PUT /tv_shows/1
