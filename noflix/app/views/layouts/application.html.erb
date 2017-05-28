@@ -13,7 +13,7 @@
       <div class="ui container">
         <%= link_to('noFLIX', root_path, class: 'item', id: 'logo') %>
         <div class="right menu">
-          <% if current_user and !current_user.is_kid %>
+          <% if current_user and !current_user.is_kid and !current_user.is_admin %>
             <%= link_to(parent_path(current_user.id), class: 'item') do %>
             <strong>MyKids</strong>
             <% end %>

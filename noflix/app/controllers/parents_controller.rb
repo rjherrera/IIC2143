@@ -17,7 +17,7 @@ class ParentsController < ApplicationController
           @result = "Kid was successfully created."
           current_user.kids << @kid
         else
-          @result = "Error."
+          @result = "An error prohibited the kid from being saved."
         end
     end
 
