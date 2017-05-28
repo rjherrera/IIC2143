@@ -20,7 +20,6 @@ tv_shows_list = [
         "How I Met Your Mother",
         "English",
         "United States",
-        "Comedy",
         2005,
         2014,
         "A father recounts to his children, through a series of flashbacks, the journey he and his four best friends took leading up to him meeting their mother.",
@@ -30,7 +29,6 @@ tv_shows_list = [
         "Prison Break",
         "English",
         "United States",
-        "Drama",
         2005,
         2009,
         "Due to a political conspiracy, an innocent man is sent to death row and his only hope is his brother, who makes it his mission to deliberately get himself sent to the same prison in order to break the both of them out, from the inside.",
@@ -40,7 +38,6 @@ tv_shows_list = [
         "The Walking Dead",
         "English",
         "United States",
-        "Drama",
         2010,
         2017,
         "Sheriff Deputy Rick Grimes wakes up from a coma, to learn the world is in ruins, and must lead a group of survivors to stay alive.",
@@ -50,7 +47,6 @@ tv_shows_list = [
         "Stranger Things",
         "English",
         "United States",
-        "Drama",
         2016,
         2016,
         "When a young boy disappears, his mother, a police chief, and his friends must confront terrifying forces in order to get him back.",
@@ -60,7 +56,6 @@ tv_shows_list = [
         "House Of Cards",
         "English",
         "United States",
-        "Drama",
         2013,
         2017,
         "A Congressman works with his equally conniving wife to exact revenge on the people who betrayed him.",
@@ -68,11 +63,10 @@ tv_shows_list = [
     ]
 ]
 
-tv_shows_list.each do |title, language, country, category, start_year, end_year, plot, director_id|
+tv_shows_list.each do |title, language, country, start_year, end_year, plot, director_id|
     TvShow.create(  title: title,
                     language: language,
                     country: country,
-                    category: category,
                     start_year: start_year,
                     end_year: end_year,
                     plot: plot,
@@ -340,6 +334,46 @@ twd.subtitles << Subtitle.find_by_language("Italian")
 st.subtitles << Subtitle.find_by_language("English")
 st.subtitles << Subtitle.find_by_language("Spanish")
 hoc.subtitles << Subtitle.find_by_language("English")
+
+# --- Categories ---
+categories_list = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Biography",
+    "Comedy",
+    "Crime",
+    "Documentary",
+    "Drama",
+    "Family",
+    "Fantasy",
+    "Film-Noir",
+    "History",
+    "Horror",
+    "Music",
+    "Musical",
+    "Mystery",
+    "Romance",
+    "Sci-Fi",
+    "Sport",
+    "Thriller",
+    "War",
+    "Western",
+]
+categories_list.each do |label|
+  Category.create( label: label )
+end
+
+himym.categories << Category.find_by_label("Comedy")
+pb.categories << Category.find_by_label("Drama")
+twd.categories << Category.find_by_label("Drama")
+st.categories << Category.find_by_label("Drama")
+hoc.categories << Category.find_by_label("Drama")
+
+# Blocked categories
+user.blocked_categories << Category.find_by_label("Drama")
+
+# Viewed Episodes
 
 user.viewed_episodes << Episode.find(1)
 user.viewed_episodes << Episode.find(2)

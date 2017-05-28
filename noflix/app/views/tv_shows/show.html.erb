@@ -57,9 +57,13 @@
       </p>
 
       <p>
-        <strong>Category:</strong>
-        <%= @tv_show.category %>
-      </p>
+        <strong>Categories:</strong>
+        <div class="ui bulleted list">
+            <% @categories.each do |category| %>
+            <div class="item"><%= category.label %></div>
+            <% end %>
+        </div>
+      <p>
 
       <p>
         <strong>Start Year:</strong>

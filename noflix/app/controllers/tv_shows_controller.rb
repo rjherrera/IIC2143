@@ -29,9 +29,9 @@ class TvShowsController < ApplicationController
     # Filter by Category
     if params[:filter_category]
         @filter_category = params[:filter_category]
-        @tv_shows = @tv_shows.select {|tv_show| tv_show.category == @filter_category }
+        @tv_shows = @tv_shows.joins(:categories).where(categories: { label: @filter_category })
         if @private_tv_shows
-            @private_tv_shows = @private_tv_shows.select {|tv_show| tv_show.category == @filter_category }
+            @private_tv_shows = @private_tv_shows.joins(:categories).where(categories: { label: @filter_category })
         end
     end
 
@@ -46,6 +46,7 @@ class TvShowsController < ApplicationController
     @articles = Article.where(tv_show_id: @tv_show.id).order('created_at DESC')
     @article = Article.new
     @subtitles = @tv_show.subtitles;
+    @categories = @tv_show.categories;
   end
 
   # GET /tv_shows/new
@@ -53,6 +54,7 @@ class TvShowsController < ApplicationController
     @user = current_user
     @tv_show = TvShow.new
     @subtitles = Subtitle.all
+    @categories = Category.all
     @actors = Actor.all
     @tv_shows = TvShow.all
   end
@@ -62,6 +64,7 @@ class TvShowsController < ApplicationController
     @user = current_user
     @tv_shows = TvShow.all
     @subtitles = Subtitle.all
+    @categories = Category.all
     @actors = Actor.all
     if !current_user.is_admin and current_user.id != @tv_show.user_id
       redirect_to TvShow
@@ -88,6 +91,16 @@ class TvShowsController < ApplicationController
         end
     end
     new_tsp[:subtitles] = new_subtitles
+
+    # Categories
+    cats_params = tv_show_params[:categories]
+    new_categories = []
+    cats_params.split(";").each do |c|
+        if Category.find_by_label(c)
+            new_categories << Category.find_by_label(c)
+        end
+    end
+    new_tsp[:categories] = new_categories
 
     # Actors
     actors_params = tv_show_params[:actors]
@@ -138,6 +151,16 @@ class TvShowsController < ApplicationController
     end
     new_tsp[:subtitles] = new_subtitles
 
+    # Categories
+    cats_params = tv_show_params[:categories]
+    new_categories = []
+    cats_params.split(";").each do |c|
+        if Category.find_by_label(c)
+            new_categories << Category.find_by_label(c)
+        end
+    end
+    new_tsp[:categories] = new_categories
+
     # Actors
     actors_params = tv_show_params[:actors]
     new_actors = []
@@ -177,6 +200,6 @@ class TvShowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tv_show_params
-      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles, :actors)
+      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles, :categories, :actors)
     end
 end

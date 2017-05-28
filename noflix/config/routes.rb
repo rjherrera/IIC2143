@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   resources :tv_shows
   resources :subtitles
   resources :reviews
@@ -24,5 +25,6 @@ Rails.application.routes.draw do
   resources :parents do
       get :new_kid, on: :member
       post :create_kid, on: :member
+      get :save_blocked, on: :member
   end
 end

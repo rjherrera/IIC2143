@@ -1,6 +1,7 @@
 class ParentsController < ApplicationController
     def show
         @kids = current_user.kids
+        @categories = Category.all
     end
 
     def new_kid
@@ -19,6 +20,18 @@ class ParentsController < ApplicationController
         else
           @result = "An error prohibited the kid from being saved."
         end
+    end
+
+    def save_blocked
+        blocked_str = params[:blocked]
+        new_blocked = []
+        blocked_str.split("-").each do |c|
+            if Category.find_by_label(c)
+                new_blocked << Category.find_by_label(c)
+            end
+        end
+        current_user.blocked_categories = new_blocked
+        redirect_to parent_path(current_user.id)
     end
 
     private

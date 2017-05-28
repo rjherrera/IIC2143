@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_tv_shows", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "tv_show_id",  null: false
+  end
+
+  create_table "categories_users", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "user_id",     null: false
+  end
+
   create_table "directors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -94,7 +110,6 @@ ActiveRecord::Schema.define(version: 20170426215523) do
     t.string   "title"
     t.string   "language"
     t.string   "country"
-    t.string   "category"
     t.integer  "start_year"
     t.integer  "end_year"
     t.text     "plot"

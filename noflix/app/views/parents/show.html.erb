@@ -1,18 +1,67 @@
 <h1>Manage Kids</h1>
 
-<%= link_to(new_kid_parent_path, :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
-    <i class="child icon"></i>
-    New Kid
-<% end %>
+<div class="ui grid">
+  <div class="eight wide column">
+      <%= link_to(new_kid_parent_path, :class=>"ui labeled icon button teal", :style => "margin-bottom:15px; margin-top:15px;") do%>
+          <i class="child icon"></i>
+          New Kid
+      <% end %>
 
-<div class="ui middle aligned celled list" style="width: 45%;">
-    <% @kids.each do |kid| %>
-      <div class="item" style="margin-bottom: 5px;">
-        <i class="large child middle aligned icon"></i>
-        <div class="content">
-          <div class="header" style="color:white;"><%= kid.name %></div>
-          <div class="description" style="color:rgba(255, 255, 255, 0.9);"><%= kid.email %></div>
-        </div>
+      <div class="ui middle aligned celled list">
+          <% @kids.each do |kid| %>
+            <div class="item" style="margin-bottom: 5px;">
+              <i class="large child middle aligned icon"></i>
+              <div class="content">
+                <div class="header" style="color:white;"><%= kid.name %></div>
+                <div class="description" style="color:rgba(255, 255, 255, 0.9);"><%= kid.email %></div>
+              </div>
+            </div>
+        <% end %>
       </div>
-  <% end %>
+  </div>
+  <div class="eight wide column">
+
+      <h2>Blocked Categories</h2>
+      <div class="field">
+        <select multiple="" class="ui dropdown search" id="categories-dropdown">
+          <option value="">Blocked Categories</option>
+          <% @categories.each do |category| %>
+          <option value="<%= category.label %>"><%= category.label %></option>
+          <% end %>
+        </select>
+      </div>
+      <button class="ui labeled icon button teal" style="margin-top:20px;" id="save-button">
+        <i class="save icon"></i>
+        Save
+      </button>
+
+      <input type="text" name="blocked" id="blocked" value="" hidden="true">
+
+  </div>
 </div>
+
+<script type="text/javascript">
+$('.ui.dropdown').dropdown();
+// Fill categories
+<% if current_user.blocked_categories %>
+    <% current_user.blocked_categories.each do |c| %>
+    $("#categories-dropdown").dropdown('set selected', "<%= c.label %>");
+    <% end %>
+<% end %>
+// Categories
+var categories = $("#categories-dropdown").dropdown('get value');
+var cats_str = "";
+for (i = 0; i < categories.length - 1; i++) cats_str += categories[i] + "-";
+$("#blocked").val(cats_str);
+$("#categories-dropdown").on('change', function() {
+    var categories = $("#categories-dropdown").dropdown('get value');
+    var cats_str = "";
+    for (i = 0; i < categories.length - 1; i++) cats_str += categories[i] + "-";
+    $("#blocked").val(cats_str);
+});
+$("#save-button").click(function(){
+    var blocked = $("#blocked").val();
+    var save_url = "<%= save_blocked_parent_path() %>";
+    window.location.replace(save_url + "?blocked=" + blocked);
+});
+</script>
