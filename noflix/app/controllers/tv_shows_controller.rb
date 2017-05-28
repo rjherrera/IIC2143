@@ -5,6 +5,7 @@ class TvShowsController < ApplicationController
   # GET /tv_shows
   # GET /tv_shows.json
   def index
+    @directors = Director.all
     @categories = Category.all
 
     @user = current_user
@@ -40,6 +41,24 @@ class TvShowsController < ApplicationController
         @tv_shows = @tv_shows.joins(:categories).where(categories: { label: @filter_category })
         if @private_tv_shows
             @private_tv_shows = @private_tv_shows.joins(:categories).where(categories: { label: @filter_category })
+        end
+    end
+
+    # Filter by Language
+    if params[:filter_language]
+        @filter_language = params[:filter_language]
+        @tv_shows = @tv_shows.where(language: @filter_language)
+        if @private_tv_shows
+            @private_tv_shows = @private_tv_shows.where(language: @filter_language)
+        end
+    end
+
+    # Filter by Director
+    if params[:filter_director]
+        @filter_director = Director.find(params[:filter_director])
+        @tv_shows = @tv_shows.where(director: @filter_director)
+        if @private_tv_shows
+            @private_tv_shows = @private_tv_shows.where(director: @filter_director)
         end
     end
 
