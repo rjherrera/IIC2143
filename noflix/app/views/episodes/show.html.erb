@@ -23,7 +23,7 @@
         <strong>Duration:</strong>
         <%= @episode.duration.strftime("%M") %> minutes
       </p>
-      <% if @user and (@user.is_admin == 0)%>
+      <% if @user and (@user.is_admin == false)%>
           <% if @viewed == 0 %>
               <%= link_to(watch_episode_path(@episode), :class=>"ui labeled icon button primary", :style => "margin-bottom:15px;") do%>
                   <i class="unhide icon"></i>
