@@ -1,7 +1,3 @@
-# --- Users ---
-admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true
-user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123'
-
 # --- Directors ---
 directors_list = [
   "Pamela Fryman",
@@ -369,6 +365,13 @@ pb.categories << Category.find_by_label("Drama")
 twd.categories << Category.find_by_label("Drama")
 st.categories << Category.find_by_label("Drama")
 hoc.categories << Category.find_by_label("Drama")
+
+
+# --- Users ---
+admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true
+user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123'
+kid1 = User.create! :name => 'John K. One', :email => 'kid1@noflix.com', :password => 'one123', :password_confirmation => 'one123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
+kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :password => 'two123', :password_confirmation => 'two123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
 
 # Blocked categories
 user.blocked_categories << Category.find_by_label("Drama")

@@ -7,6 +7,12 @@ class TvShowsController < ApplicationController
   def index
     @user = current_user
     if @user
+        if @user.is_kid
+            father = User.find(@user.father_id)
+            father.private_tv_shows.each do |tv_show|
+                @user.private_tv_shows << tv_show
+            end
+        end
         @user.private_tv_shows.each do |tv_show|
             stars_avg = Review.where(tv_show_id: tv_show.id).average(:stars)
             if stars_avg != nil
@@ -32,6 +38,19 @@ class TvShowsController < ApplicationController
         @tv_shows = @tv_shows.joins(:categories).where(categories: { label: @filter_category })
         if @private_tv_shows
             @private_tv_shows = @private_tv_shows.joins(:categories).where(categories: { label: @filter_category })
+        end
+    end
+
+    # Filter Kid
+    if @user and @user.is_kid
+        User.find(@user.father_id).blocked_categories.each do |c|
+            puts c.label
+            if @private_tv_shows
+                @private_tv_shows.joins(:categories).where.not(categories: { label: c.label })
+            end
+            if @tv_shows
+                @tv_shows = @tv_shows.joins(:categories).where.not(categories: { label: c.label })
+            end
         end
     end
 

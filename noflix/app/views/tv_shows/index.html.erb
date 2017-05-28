@@ -43,7 +43,7 @@
 
 </div>
 
-<% if @user %>
+<% if @user and !@user.is_kid%>
     <%= link_to(new_tv_show_path, :class=>"ui labeled icon button teal") do%>
         <i class="add circle icon"></i>
         New TV Show
@@ -51,7 +51,8 @@
 <% end %>
 
 <% if @user %>
-    <% if @user.is_admin %> <h1>All Private TV Shows</h1>
+    <% if @user.is_admin %>
+        <h1>All Private TV Shows</h1>
         <div class="ui link four cards">
             <% @tv_shows.each do |tv_show| %>
                 <% if tv_show.user_id != nil %>

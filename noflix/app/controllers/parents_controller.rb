@@ -12,6 +12,7 @@ class ParentsController < ApplicationController
         new_kp = kid_params
         new_kp[:is_kid] = true
         new_kp[:is_admin] = false
+        new_kp[:father_id] = current_user.id
         @kid = User.new(new_kp)
 
         if @kid.save
