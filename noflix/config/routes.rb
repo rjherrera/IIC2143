@@ -20,4 +20,9 @@ Rails.application.routes.draw do
       get :set_admin, on: :member
       get :remove_admin, on: :member
   end
+  # Parents Dashboard Index
+  resources :parents do
+      get :new_kid, on: :member
+      post :create_kid, on: :member
+  end
 end

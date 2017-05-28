@@ -1,0 +1,18 @@
+<h1>Manage Kids</h1>
+
+<%= link_to(new_kid_parent_path, :class=>"ui labeled icon button teal", :style => "margin-bottom:15px;") do%>
+    <i class="child icon"></i>
+    New Kid
+<% end %>
+
+<div class="ui middle aligned celled list" style="width: 45%;">
+    <% @kids.each do |kid| %>
+      <div class="item" style="margin-bottom: 5px;">
+        <i class="large user middle aligned icon"></i>
+        <div class="content">
+          <div class="header" style="color:white;"><%= kid.name %></div>
+          <div class="description" style="color:rgba(255, 255, 255, 0.9);"><%= kid.email %></div>
+        </div>
+      </div>
+  <% end %>
+</div>
