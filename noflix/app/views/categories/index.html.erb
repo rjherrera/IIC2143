@@ -1,11 +1,15 @@
+<h1>Categories</h1>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Categories</h1>
+<%= link_to(new_category_path, :class => "ui small teal labeled icon button", :style => "margin-bottom: 20px;") do %>
+    <i class="world icon"></i> New Category
+<% end %>
 
 <table>
   <thead>
     <tr>
-      <th>Label</th>
+      <!-- <th>Label</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,14 +18,21 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.label %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%= link_to 'Show', category %></td> -->
+        <td>
+            <%= link_to(edit_category_path(category), :class => "ui small teal labeled icon button", :style => "margin-bottom:5px; margin-left:30px;") do %>
+            <i class="edit icon"></i> Edit
+            <% end %>
+        </td>
+        <td>
+            <%= link_to(category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ui small negative labeled icon button", :style => "margin-bottom:5px;") do %>
+            <i class="trash icon"></i> Destroy
+            <% end %>
+        </td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Category', new_category_path %>

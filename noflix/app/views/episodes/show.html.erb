@@ -21,7 +21,7 @@
 
       <p style="margin-bottom: 30px;">
         <strong>Duration:</strong>
-        <%= @episode.duration.strftime("%M") %> minutes
+        <%= @episode.duration.strftime("%H:%M") %>
       </p>
       <% if @user and (@user.is_admin == false)%>
           <% if @viewed == 0 %>
