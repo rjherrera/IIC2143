@@ -206,7 +206,7 @@
                 <% if tv_show.user_id != nil %>
                     <%= link_to(tv_show_path(tv_show), :class => "card") do %>
                           <div class="image">
-                              <img src="<%= asset_path('strangerthings.jpg') %>" />
+                              <img src="<%= asset_path(tv_show.image_url) %>" />
                           </div>
                           <div class="content">
                             <div class="header"><%= tv_show.title %></div>
@@ -232,7 +232,7 @@
             <% @user.private_tv_shows.each do |private_tv_show| %>
             <%= link_to(tv_show_path(private_tv_show), :class => "card") do %>
                   <div class="image">
-                      <img src="<%= asset_path('how.jpg') %>" />
+                      <img src="<%= asset_path(private_tv_show.image_url) %>" />
                   </div>
                   <div class="content">
                     <div class="header"><%= private_tv_show.title %></div>
@@ -259,7 +259,7 @@
         <% if tv_show.user_id == nil %>
             <%= link_to(tv_show_path(tv_show), :class => "card") do %>
                   <div class="image">
-                      <img src="<%= asset_path('how.jpg') %>" />
+                      <img src="<%= asset_path(tv_show.image_url) %>" />
                   </div>
                   <div class="content">
                     <div class="header"><%= tv_show.title %></div>
