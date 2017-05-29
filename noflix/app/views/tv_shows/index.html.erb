@@ -169,19 +169,39 @@
 
   <!-- FILTER: Favourite  -->
 
-  <% if @user %>
+  <% if @user
+    @color1 = ("blue" if !@favourite_directors) || "green"
+    @color2 = ("blue" if !@favourite_categories) || "green"
+    %>
     <div class="field" style="margin-top:20px; margin-bottom:20px;">
-    <%= link_to(tv_shows_path(:fav_filter => "favourite directors"), :class=>"ui labeled icon button blue") do%>
-        <i class="edit icon"></i>
+    <%= link_to(tv_shows_path(:fav_filter => "favourite directors"), :class=>"ui labeled icon button " + @color1) do%>
+        <i class="tag icon"></i>
         Filter - Favourite Directors
     <% end %>
-    <%= link_to(tv_shows_path(:fav_filter => "favourite categories"), :class=>"ui labeled icon button blue") do%>
-        <i class="edit icon"></i>
+    <%= link_to(tv_shows_path(:fav_filter => "favourite categories"), :class=>"ui labeled icon button " + @color2) do%>
+        <i class="tag icon"></i>
         Filter - Favourite Categories
     <% end %>
   </div>
   <% end %>
 
+  <% if @favourite_directors %>
+    <div class="field" style="margin-top:20px; margin-bottom:20px;"><h3>
+      Your favourite directors:
+      <% @user.favourite_directors.each do |director| %>
+        <%= director.name %>
+        <%= ", " if !(director == @user.favourite_directors.last)%>
+      <% end %>
+    </h3></div>
+  <% elsif @favourite_categories %>
+    <div class="field" style="margin-top:20px; margin-bottom:20px;"><h3>
+      Your favourite categories:
+      <% @user.favourite_categories.each do |category| %>
+        <%= category %>
+        <%= ", " if !(category == @user.favourite_categories.last)%>
+      <% end %>
+    </h3></div>
+  <% end %>
 
 
 <% if @user and !@user.is_kid%>

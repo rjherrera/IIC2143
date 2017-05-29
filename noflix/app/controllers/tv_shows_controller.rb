@@ -65,6 +65,7 @@ class TvShowsController < ApplicationController
     # Filter by favourites
     if params[:fav_filter]
       if params[:fav_filter] == "favourite directors"
+        @favourite_directors = 1
         @new_tv_shows = []
         @tv_shows.each do |t|
           if @user.favourite_directors.exists?(t.director.id)
@@ -82,6 +83,7 @@ class TvShowsController < ApplicationController
           @private_tv_shows = @new_tv_shows
         end
       elsif params[:fav_filter] == "favourite categories"
+        @favourite_categories = 1
         @new_tv_shows = []
         @tv_shows.each do |t|
           t.category_ids.each do |id|
