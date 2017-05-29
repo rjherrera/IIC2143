@@ -172,7 +172,17 @@
             <i class="add circle icon"></i> Un-Favourite
         <% end %>
     <% end %>
-
+<% end %>
+<% if @user and @filter_director%>
+  <% if !@user.favourite_directors.exists?(@filter_director.id) %>
+    <%= link_to(directors_path(:fav => @filter_director.id), method: :post, :class => "ui labeled icon button green") do %>
+        <i class="add circle icon"></i> Favourite
+    <% end %>
+  <% else %>
+    <%= link_to(directors_path(:fav => @filter_director.id), method: :post, :class => "ui labeled icon button yellow") do %>
+        <i class="add circle icon"></i> Un-Favourite
+    <% end %>
+  <% end %>
 <% end %>
 
 <% if @user %>
