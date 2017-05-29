@@ -74,7 +74,9 @@ class TvShowsController < ApplicationController
             end
         end
     end
-
+    if !@user
+      render 'abc'
+    end
   end
 
   # GET /tv_shows/1

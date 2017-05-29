@@ -1,16 +1,18 @@
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'ui inverted form'}) do |f| %>
-<!--   <div id="error_explanation" class="ui negative message">
+<% if !flash.empty? -%>
+  <div id="error_explanation" class="ui negative message">
     <i class="close icon"></i>
-    <div class="header"><%= pluralize(resource.errors.count, "error") %> prohibited this user from being saved:</div>
+    <div class="header">Login failed!</div>
 
     <ul class="list">
-    <% resource.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <%- end -%>
     </ul>
-  </div> -->
+  </div>
+<%- end -%>
 
   <div class="field">
     <%= f.label :email %>
