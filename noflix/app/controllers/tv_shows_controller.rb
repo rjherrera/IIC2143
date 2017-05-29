@@ -62,6 +62,51 @@ class TvShowsController < ApplicationController
         end
     end
 
+    # Filter by favourites
+    if params[:fav_filter]
+      if params[:fav_filter] == "favourite directors"
+        @new_tv_shows = []
+        @tv_shows.each do |t|
+          if @user.favourite_directors.exists?(t.director.id)
+            @new_tv_shows << t
+          end
+        end
+        @tv_shows = @new_tv_shows
+        if @private_tv_shows
+          @new_tv_shows = []
+          @private_tv_shows.each do |t|
+            if @user.favourite_directors.exists?(t.director.id)
+              @new_tv_shows << t
+            end
+          end
+          @private_tv_shows = @new_tv_shows
+        end
+      elsif params[:fav_filter] == "favourite categories"
+        @new_tv_shows = []
+        @tv_shows.each do |t|
+          t.category_ids.each do |id|
+            if @user.favourite_categories.include?(Category.find(id).label)
+              @new_tv_shows << t if !@new_tv_shows.include?(t)
+            end
+          end
+        end
+        @tv_shows = @new_tv_shows
+        if @private_tv_shows
+          @new_tv_shows = []
+          @private_tv_shows.each do |t|
+            t.category_ids.each do |id|
+              if @user.favourite_categories.include?(Category.find(id).label)
+                @new_tv_shows << t if !@new_tv_shows.include?(t)
+              end
+            end
+          end
+          @private_tv_shows = @new_tv_shows
+        end
+      else
+        error
+      end
+    end
+
     # Filter Kid
     if @user and @user.is_kid
         User.find(@user.father_id).blocked_categories.each do |c|
