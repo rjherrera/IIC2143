@@ -332,32 +332,10 @@ st.subtitles << Subtitle.find_by_language("Spanish")
 hoc.subtitles << Subtitle.find_by_language("English")
 
 # --- Categories ---
-categories_list = [
-    "Action",
-    "Adventure",
-    "Animation",
-    "Biography",
-    "Comedy",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "Film-Noir",
-    "History",
-    "Horror",
-    "Music",
-    "Musical",
-    "Mystery",
-    "Romance",
-    "Sci-Fi",
-    "Sport",
-    "Thriller",
-    "War",
-    "Western",
-]
-categories_list.each do |label|
-  Category.create( label: label )
+File.open("db/seeds/categories.txt", "r") do |f|
+  f.each_line do |l|
+    Category.create( label: l.gsub("\n", "") )
+  end
 end
 
 himym.categories << Category.find_by_label("Comedy")
@@ -372,15 +350,14 @@ hoc.categories << Category.find_by_label("Drama")
 # --- Users ---
 admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true
 user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123'
-kid1 = User.create! :name => 'John K. One', :email => 'kid1@noflix.com', :password => 'one123', :password_confirmation => 'one123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
-kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :password => 'two123', :password_confirmation => 'two123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
+kid1 = User.create! :name => 'John K. One', :email => 'kid1@noflix.com', :password => 'uno123', :password_confirmation => 'uno123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
+kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :password => 'dos123', :password_confirmation => 'dos123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
 
 # Blocked categories
 user.blocked_categories << Category.find_by_label("Drama")
 user.blocked_categories << Category.find_by_label("Action")
 
 # Viewed Episodes
-
 user.viewed_episodes << Episode.find(1)
 user.viewed_episodes << Episode.find(2)
 user.viewed_episodes << Episode.find(3)
@@ -392,3 +369,17 @@ kid2.viewed_episodes << Episode.find(5)
 kid2.viewed_episodes << Episode.find(6)
 kid2.viewed_episodes << Episode.find(7)
 kid2.viewed_episodes << Episode.find(8)
+
+# Reviews
+File.open("db/seeds/reviews_himym.txt", "r") do |f|
+  f.each_line do |c|
+    Review.create(stars: rand(4..5), comment: c.gsub("\n", ""), tv_show_id: 1, episode_id: 1, user_id: rand(2..4))
+  end
+end
+
+# Articles
+File.open("db/seeds/articles_himym.txt", "r") do |f|
+  f.each_line do |c|
+    Article.create(content: c.gsub("\n", ""), tv_show_id: 1, user_id: rand(2..4))
+  end
+end
