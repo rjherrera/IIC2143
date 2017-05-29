@@ -167,17 +167,17 @@
 
 
 
-  <!-- FILTER: Favourite directors -->
+  <!-- FILTER: Favourite  -->
 
   <% if @user %>
     <div class="field" style="margin-top:20px; margin-bottom:20px;">
     <%= link_to(tv_shows_path(:fav_filter => "favourite directors"), :class=>"ui labeled icon button blue") do%>
         <i class="edit icon"></i>
-        Favourite Directors
+        Filter - Favourite Directors
     <% end %>
     <%= link_to(tv_shows_path(:fav_filter => "favourite categories"), :class=>"ui labeled icon button blue") do%>
         <i class="edit icon"></i>
-        Favourite Categories
+        Filter - Favourite Categories
     <% end %>
   </div>
   <% end %>
