@@ -362,7 +362,9 @@ end
 
 himym.categories << Category.find_by_label("Comedy")
 pb.categories << Category.find_by_label("Drama")
+pb.categories << Category.find_by_label("Action")
 twd.categories << Category.find_by_label("Drama")
+twd.categories << Category.find_by_label("Action")
 st.categories << Category.find_by_label("Drama")
 hoc.categories << Category.find_by_label("Drama")
 
@@ -375,9 +377,18 @@ kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :passwo
 
 # Blocked categories
 user.blocked_categories << Category.find_by_label("Drama")
+user.blocked_categories << Category.find_by_label("Action")
 
 # Viewed Episodes
 
 user.viewed_episodes << Episode.find(1)
 user.viewed_episodes << Episode.find(2)
 user.viewed_episodes << Episode.find(3)
+kid1.viewed_episodes << Episode.find(1)
+kid1.viewed_episodes << Episode.find(2)
+kid1.viewed_episodes << Episode.find(3)
+kid1.viewed_episodes << Episode.find(4)
+kid2.viewed_episodes << Episode.find(5)
+kid2.viewed_episodes << Episode.find(6)
+kid2.viewed_episodes << Episode.find(7)
+kid2.viewed_episodes << Episode.find(8)
