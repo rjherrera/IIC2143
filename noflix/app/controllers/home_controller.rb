@@ -34,7 +34,7 @@ class HomeController < ApplicationController
                   tv_show.stars_avg = "-"
               end
           end
-          render 'home'
+          render 'index'
         end
     end
 end
