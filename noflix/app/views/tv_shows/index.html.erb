@@ -154,6 +154,21 @@
     <% end %>
   </div>
 
+  <!-- FILTER: Favourite directors -->
+
+  <% if @user %>
+    <div class="field" style="margin-top:20px; margin-bottom:20px;">
+    <%= link_to(tv_shows_path(:fav_filter => "favourite directors"), :class=>"ui labeled icon button blue") do%>
+        <i class="edit icon"></i>
+        Favourite Directors
+    <% end %>
+    <%= link_to(tv_shows_path(:fav_filter => "favourite categories"), :class=>"ui labeled icon button blue") do%>
+        <i class="edit icon"></i>
+        Favourite Categories
+    <% end %>
+  </div>
+  <% end %>
+
 
 
 <% if @user and !@user.is_kid%>
