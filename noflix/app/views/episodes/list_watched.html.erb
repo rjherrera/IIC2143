@@ -1,4 +1,10 @@
-<h1>Watched Episodes</h1>
+<h1>Watched Episodes
+    <i class="chevron right icon"></i>
+    <%= @days %> days,
+    <%= @hours %> hours,
+    <%= @minutes %> minutes,
+    <%= @seconds %> seconds
+</h1>
 
 <div class="ui list">
   <% @user.viewed_episodes.each do |episode| %>
@@ -16,6 +22,8 @@
     </div>
   <% end %>
 </div>
+
+
 
 
 <canvas id="myChart" width="400" height="150"></canvas>
