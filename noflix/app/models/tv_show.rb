@@ -1,5 +1,5 @@
 class TvShow < ApplicationRecord
-    attr_accessor :stars_avg
+    attr_accessor :stars_avg, :watched_count
 
     has_many :seasons, :dependent => :destroy
     belongs_to :director

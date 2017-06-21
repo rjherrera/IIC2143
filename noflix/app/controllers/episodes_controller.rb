@@ -45,6 +45,15 @@ class EpisodesController < ApplicationController
   # GET /episodes/1/list_watched
   def list_watched
     @user = current_user
+    @viewed_tv_shows = []
+    @user.viewed_episodes.each do |episode|
+        episode.season.tv_show.watched_count = 0
+        @viewed_tv_shows << episode.season.tv_show
+    end
+    @viewed_tv_shows.each do |tv_show|
+        tv_show.watched_count = @viewed_tv_shows.count(tv_show)
+    end
+    @viewed_tv_shows = @viewed_tv_shows.uniq
   end
 
   # POST /episodes

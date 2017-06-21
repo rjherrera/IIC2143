@@ -16,3 +16,54 @@
     </div>
   <% end %>
 </div>
+
+
+<canvas id="myChart" width="400" height="150"></canvas>
+<script>
+Chart.defaults.global.defaultFontColor='white';
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: [
+            <% @viewed_tv_shows.each do |t| %>
+            "<%= t.title %>",
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Number of watched episodes',
+            data: [
+                <% @viewed_tv_shows.each do |t| %>
+                <%= t.watched_count %>,
+                // 6,
+                <% end %>
+            ],
+            backgroundColor: [
+                <% @viewed_tv_shows.each do |t| %>
+                'rgba(75, 192, 192, 0.2)',
+                <% end %>
+            ],
+            borderColor: [
+                <% @viewed_tv_shows.each do |t| %>
+                'rgba(75, 192, 192, 1)',
+                <% end %>
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        barThickness: 5,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize:1,
+                }
+            }],
+            yAxes: [{
+                barThickness: 35
+            }]
+        },
+    }
+});
+</script>

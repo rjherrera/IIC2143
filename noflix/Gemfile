@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'chart-js-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
