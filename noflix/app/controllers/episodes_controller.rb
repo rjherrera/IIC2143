@@ -45,8 +45,10 @@ class EpisodesController < ApplicationController
   # GET /episodes/1/list_watched
   def list_watched
     @user = current_user
+    total_seconds_time = 0
     @viewed_tv_shows = []
     @user.viewed_episodes.each do |episode|
+        total_seconds_time += episode.duration.hour*3600 + episode.duration.min*60 + episode.duration.sec
         episode.season.tv_show.watched_count = 0
         @viewed_tv_shows << episode.season.tv_show
     end
@@ -54,6 +56,24 @@ class EpisodesController < ApplicationController
         tv_show.watched_count = @viewed_tv_shows.count(tv_show)
     end
     @viewed_tv_shows = @viewed_tv_shows.uniq
+
+    @days = 0
+    @hours = 0
+    @minutes = 0
+    @seconds = 0
+    if (total_seconds_time/(3600*24)).to_i > 0
+        @days = (total_seconds_time/(3600*24)).to_i
+        total_seconds_time -= @days * (3600*24)
+    end
+    if (total_seconds_time/3600).to_i > 0
+        @hours = (total_seconds_time/3600).to_i
+        total_seconds_time -= @hours * 3600
+    end
+    if (total_seconds_time/60).to_i > 0
+        @minutes = (total_seconds_time/60).to_i
+        total_seconds_time -= @minutes * 60
+    end
+    @seconds = total_seconds_time
   end
 
   # POST /episodes
