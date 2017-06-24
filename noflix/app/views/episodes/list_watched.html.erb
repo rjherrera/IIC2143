@@ -12,17 +12,22 @@
       <i class="film icon"></i>
       <div class="content">
         <div class="header" style="color: white;">
+            <%= link_to(tv_show_path(episode.season.tv_show), :style => "color: white;") do %>
             <%= episode.season.tv_show.title %>
+            <% end %>
             <i class="caret right icon"></i>
+            <%= link_to(season_path(episode.season), :style => "color: white;") do %>
             Season <%= episode.season.number %>
+            <% end %>
             <i class="caret right icon"></i>
+            <%= link_to(episode_path(episode), :style => "color: white;") do %>
             Episode <%= episode.number %>:  <%= episode.title %>
+            <% end %>
         </div>
       </div>
     </div>
   <% end %>
 </div>
-
 
 
 
