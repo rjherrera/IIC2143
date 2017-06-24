@@ -172,13 +172,15 @@
   <% if @user
     @color1 = ("blue" if !@favourite_directors) || "green"
     @color2 = ("blue" if !@favourite_categories) || "green"
+    @fav_dir_str = ("favourite directors" if !@favourite_directors) || "None"
+    @fav_cat_str = ("favourite categories" if !@favourite_categories) || "None"
     %>
     <div class="field" style="margin-top:20px; margin-bottom:20px;">
-    <%= link_to(tv_shows_path(:fav_filter => "favourite directors"), :class=>"ui labeled icon button " + @color1) do%>
+    <%= link_to(tv_shows_path(:fav_filter => @fav_dir_str), :class=>"ui labeled icon button " + @color1) do%>
         <i class="tag icon"></i>
         Filter - Favourite Directors
     <% end %>
-    <%= link_to(tv_shows_path(:fav_filter => "favourite categories"), :class=>"ui labeled icon button " + @color2) do%>
+    <%= link_to(tv_shows_path(:fav_filter => @fav_cat_str), :class=>"ui labeled icon button " + @color2) do%>
         <i class="tag icon"></i>
         Filter - Favourite Categories
     <% end %>
@@ -213,7 +215,7 @@
 <% if @user and @filter_category %>
     <% if !@user.favourite_categories.include?(@filter_category) %>
         <%= link_to(tv_shows_path(:fav => @filter_category), method: :post, :class=>"ui labeled icon button green") do%>
-            <i class="add circle icon"></i> Favourite
+            <i class="add circle icon"></i> Add as favourite
         <% end %>
     <% else %>
         <%= link_to(tv_shows_path(:fav => @filter_category), method: :post, :class=>"ui labeled icon button yellow") do%>
@@ -224,7 +226,7 @@
 <% if @user and @filter_director%>
   <% if !@user.favourite_directors.exists?(@filter_director.id) %>
     <%= link_to(directors_path(:fav => @filter_director.id), method: :post, :class => "ui labeled icon button green") do %>
-        <i class="add circle icon"></i> Favourite
+        <i class="add circle icon"></i> Add as favourite
     <% end %>
   <% else %>
     <%= link_to(directors_path(:fav => @filter_director.id), method: :post, :class => "ui labeled icon button yellow") do %>

@@ -104,6 +104,8 @@ class TvShowsController < ApplicationController
           end
           @private_tv_shows = @new_tv_shows
         end
+      elsif params[:fav_filter] == "None"
+
       else
         error
       end
