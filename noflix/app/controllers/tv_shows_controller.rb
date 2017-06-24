@@ -241,6 +241,10 @@ class TvShowsController < ApplicationController
   # PATCH/PUT /tv_shows/1
   # PATCH/PUT /tv_shows/1.json
   def update
+    @subtitles = Subtitle.all
+    @categories = Category.all
+    @actors = Actor.all
+    @tv_shows = TvShow.all
     new_tsp = tv_show_params
     # Director Name
     name = tv_show_params[:director_id].split.map(&:capitalize).join(' ')
@@ -308,6 +312,6 @@ class TvShowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tv_show_params
-      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles, :categories, :actors)
+      params.require(:tv_show).permit(:title, :language, :country, :category, :start_year, :end_year, :plot, :director_id, :user_id, :subtitles, :categories, :actors, :image)
     end
 end

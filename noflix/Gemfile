@@ -39,6 +39,10 @@ gem 'devise'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'chart-js-rails'
 
+# Upload images
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

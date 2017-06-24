@@ -17,11 +17,25 @@ class TvShow < ApplicationRecord
     validates :plot, presence: true
     validates :director_id, presence: true
 
+    mount_uploader :image, ImageUploader
+
+    validates_processing_of :image
+    validate :image_size_validation
+
+
     def image_url
+      if self.image.path
+        url = self.image
+      else
         if self.id < 6
             url = 'tv_shows_covers/' + self.id.to_s + '.jpg'
         else
             url = 'tv_shows_covers/' + (self.id % 5 + 1).to_s + '.jpg'
         end
+      end
     end
+    private
+      def image_size_validation
+        errors[:image] << "should be less than 2MB" if image.size > 2.megabytes
+      end
 end

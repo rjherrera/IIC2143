@@ -452,6 +452,11 @@
     </select>
   </div>
 
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image, :"data-validate" => 'image' %>
+  </div>
+
   <%= f.hidden_field :subtitles, :value => "" %>
 
 
