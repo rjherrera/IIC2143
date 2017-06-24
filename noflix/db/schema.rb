@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20170624040436) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "season_id"
-    t.string   "image"
     t.index ["season_id"], name: "index_episodes_on_season_id", using: :btree
   end
 

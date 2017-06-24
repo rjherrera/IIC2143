@@ -74,6 +74,14 @@ class EpisodesController < ApplicationController
         total_seconds_time -= @minutes * 60
     end
     @seconds = total_seconds_time
+
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        response.headers['Content-Disposition'] = 'attachment; filename="my_noflix_stats.xlsx"'
+      }
+    end
+
   end
 
   # POST /episodes

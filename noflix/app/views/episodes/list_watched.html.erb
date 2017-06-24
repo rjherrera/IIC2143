@@ -6,6 +6,11 @@
     <%= @seconds %> seconds
 </h1>
 
+<%= link_to(list_watched_episode_path(1, format: :xlsx), :class=>"ui labeled icon button teal") do %>
+<i class="download icon"></i>
+Download as .xlsx
+<% end %>
+
 <div class="ui list">
   <% @user.viewed_episodes.each do |episode| %>
     <div class="item">
@@ -29,8 +34,6 @@
   <% end %>
 </div>
 
-
-
 <canvas id="myChart" width="400" height="150"></canvas>
 <script>
 Chart.defaults.global.defaultFontColor='white';
@@ -53,7 +56,7 @@ var myChart = new Chart(ctx, {
             ],
             backgroundColor: [
                 <% @viewed_tv_shows.each do |t| %>
-                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.5)',
                 <% end %>
             ],
             borderColor: [

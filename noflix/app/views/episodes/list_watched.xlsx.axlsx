@@ -1,0 +1,28 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+
+    header_cell = style.add_style(:b => true,
+                                  alignment: { horizontal: :center })
+    data_cell = style.add_style(alignment: { horizontal: :center })
+
+    wb.add_worksheet(name: "Watched Episodes") do |sheet|
+      sheet.add_row ["Tv Show", "Season", "Episode #", "Episode Title"], style: [header_cell, header_cell, header_cell, header_cell]
+      @user.viewed_episodes.each do |episode|
+        sheet.add_row [episode.season.tv_show.title, episode.season.number, episode.number, episode.title], style: [data_cell, data_cell, data_cell, data_cell]
+      end
+    end
+
+    wb.add_worksheet(name: "Chart") do |sheet|
+        @viewed_tv_shows.each do |tv_show|
+          sheet.add_row [tv_show.title, tv_show.watched_count], style: [data_cell, data_cell]
+        end
+        sheet.add_chart(Axlsx::Bar3DChart, start_at: "D1", end_at: "N#{@viewed_tv_shows.length * 6}") do |chart|
+          chart.add_series data: sheet["B1:B#{@viewed_tv_shows.length}"],
+                           labels: sheet["A1:A#{@viewed_tv_shows.length}"],
+                           title: "Number of watched episodes",
+                           colors: @viewed_tv_shows.map { "4bc0c0" }
+        end
+    end
+
+end
