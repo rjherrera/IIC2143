@@ -80,6 +80,8 @@ class EpisodesController < ApplicationController
   # POST /episodes.json
   def create
     @episode = Episode.new(episode_params)
+    @season = Season.find(@episode.season_id)
+    @tv_show = TvShow.find(@season.tv_show_id)
 
     respond_to do |format|
       if @episode.save
