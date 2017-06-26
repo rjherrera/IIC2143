@@ -348,10 +348,10 @@ hoc.categories << Category.find_by_label("Drama")
 
 
 # --- Users ---
-admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true
-user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123'
-kid1 = User.create! :name => 'John K. One', :email => 'kid1@noflix.com', :password => 'uno123', :password_confirmation => 'uno123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
-kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :password => 'dos123', :password_confirmation => 'dos123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id
+admin = User.create! :name => 'John A. Doe', :email => 'admin@noflix.com', :password => 'admin123', :password_confirmation => 'admin123', :is_admin => true, :confirmed_at => "2017-06-20 00:00:00"
+user = User.create! :name => 'John U. Doe', :email => 'user@noflix.com', :password => 'user123', :password_confirmation => 'user123', :confirmed_at => "2017-06-20 00:00:00"
+kid1 = User.create! :name => 'John K. One', :email => 'kid1@noflix.com', :password => 'uno123', :password_confirmation => 'uno123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id, :confirmed_at => "2017-06-20 00:00:00"
+kid2 = User.create! :name => 'John K. Two', :email => 'kid2@noflix.com', :password => 'dos123', :password_confirmation => 'dos123', :is_kid => true, :father_id => User.find_by_email("user@noflix.com").id, :confirmed_at => "2017-06-20 00:00:00"
 
 # Blocked categories
 user.blocked_categories << Category.find_by_label("Drama")
