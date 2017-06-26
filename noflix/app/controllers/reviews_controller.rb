@@ -27,6 +27,13 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     respond_to do |format|
       if @review.save
+
+        # Sacar review anterior
+        @old_review = Review.where(user_id: @review.user.id, episode_id: @review.episode.id)
+        if @old_review.count > 1
+          @old_review.first.destroy
+        end
+        
         @episode = Episode.find(@review.episode_id)
         format.html { redirect_to @episode, notice: 'Review was successfully created.' }
         # format.html { redirect_to @review, notice: 'Review was successfully created.' }
