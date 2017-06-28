@@ -2,7 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'ui inverted form'}) do |f| %>
 <% if !flash.empty? -%>
-  <div id="error_explanation" class="ui negative message">
+  <div id="error_explanation" class="ui <%if flash[:alert] %>negative <%else%>positive <%- end -%>message">
     <i class="close icon"></i>
     <div class="header">Login alert!</div>
 
