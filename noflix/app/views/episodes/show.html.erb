@@ -55,7 +55,18 @@
           <div class="ui huge star rating new-review" style="margin-top: 10px;"></div>
         </div>
         <div class="ui teal labeled submit icon button" id="add-review">
-          <i class="icon star"></i> Add Review
+          <%
+          @tiene_reviews = false
+          @reviews.each do |review|
+            if review.user.id == @user.id
+              @tiene_reviews = true
+            end
+          end %>
+          <% if !@tiene_reviews %>
+            <i class="icon star"></i> Add Review
+          <% else %>
+            <i class="icon star"></i> Edit Review
+          <% end %>
         </div>
       </form>
       <% end %>

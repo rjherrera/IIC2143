@@ -194,6 +194,9 @@
         <%= director.name %>
         <%= ", " if !(director == @user.favourite_directors.last)%>
       <% end %>
+      <% if @user.favourite_directors.empty?%>
+        <%= "You have no favourite directors" %>
+      <% end %>
     </h3></div>
   <% elsif @favourite_categories %>
     <div class="field" style="margin-top:20px; margin-bottom:20px;"><h3>
@@ -201,6 +204,9 @@
       <% @user.favourite_categories.each do |category| %>
         <%= category %>
         <%= ", " if !(category == @user.favourite_categories.last)%>
+      <% end %>
+      <% if @user.favourite_categories.empty?%>
+        <%= "You have no favourite categories" %>
       <% end %>
     </h3></div>
   <% end %>

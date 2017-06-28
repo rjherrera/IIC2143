@@ -9,7 +9,7 @@
 
 <div class="ui two column grid">
   <div class="six wide column">
-    <img src="<%= asset_path('how.jpg') %>" style="width: 100%; margin-bottom: 20px;"/>
+    <img src="<%= asset_path(@tv_show.image_url) %>" style="width: 100%; margin-bottom: 20px;"/>
 
     <!-- Solo pueden editar y agregar capitulos: admin y owners -->
     <% if @user and (@user.is_admin or @user.id == @tv_show.user_id) %>
