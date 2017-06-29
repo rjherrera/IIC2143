@@ -42,9 +42,16 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-  <div class="field">
-    <%= f.submit "Sign up", :class => 'ui teal button' %>
-  </div>
+  <br>
+  <%= f.submit "Sign up", :class => 'ui teal button' %>
+    <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), :class => 'ui blue labeled icon button' do %>
+        Sign up with <%= OmniAuth::Utils.camelize(provider) =%>
+        <i class="facebook icon"></i>
+      <% end -%>
+    <% end -%>
+  <% end -%>
 <% end %>
 
 <%= render "devise/shared/links" %>
