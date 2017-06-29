@@ -46,6 +46,14 @@ gem 'axlsx_rails'
 gem 'carrierwave'
 gem 'mini_magick'
 
+
+# FB-login
+gem "omniauth"
+gem "omniauth-facebook"
+
+# ENV
+gem "dotenv-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

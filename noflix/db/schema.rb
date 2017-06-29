@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625235538) do
+ActiveRecord::Schema.define(version: 20170628233040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20170625235538) do
     t.integer "director_id"
     t.index ["director_id"], name: "index_favourite_directors_on_director_id", using: :btree
     t.index ["user_id"], name: "index_favourite_directors_on_user_id", using: :btree
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -159,6 +168,7 @@ ActiveRecord::Schema.define(version: 20170625235538) do
   add_foreign_key "articles", "tv_shows"
   add_foreign_key "articles", "users"
   add_foreign_key "episodes", "seasons"
+  add_foreign_key "identities", "users"
   add_foreign_key "reviews", "episodes"
   add_foreign_key "reviews", "tv_shows"
   add_foreign_key "reviews", "users"

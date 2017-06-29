@@ -1,5 +1,12 @@
+
 <h2>Log in</h2>
 
+<style type="text/css">
+  #page_container {
+    width: 50%;
+    min-height: 0px;
+  }
+</style>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'ui inverted form'}) do |f| %>
 <% if !flash.empty? -%>
   <div id="error_explanation" class="ui <%if flash[:alert] %>negative <%else%>positive <%- end -%>message">
@@ -30,9 +37,20 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
-  <div class="field">
-    <%= f.submit "Log in", :class => 'ui teal button' %>
-  </div>
+
+  <br>
+
+  <%= f.submit "Log in", :class => 'ui teal button' %>
+
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), :class => 'ui blue labeled icon button' do %>
+        Log in with <%= OmniAuth::Utils.camelize(provider) =%>
+        <i class="facebook icon"></i>
+      <% end -%>
+    <% end -%>
+  <% end -%>
 <% end %>
+
 
 <%= render "devise/shared/links" %>
