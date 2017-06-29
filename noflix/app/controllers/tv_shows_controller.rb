@@ -116,10 +116,10 @@ class TvShowsController < ApplicationController
         User.find(@user.father_id).blocked_categories.each do |c|
             puts c.label
             if @private_tv_shows
-                @private_tv_shows.joins(:categories).where.not(categories: { label: c.label })
+                @private_tv_shows.joins(:categories).where.not(categories: { label: c.label }).uniq
             end
             if @tv_shows
-                @tv_shows = @tv_shows.joins(:categories).where.not(categories: { label: c.label })
+                @tv_shows = @tv_shows.joins(:categories).where.not(categories: { label: c.label }).uniq
             end
         end
     end
