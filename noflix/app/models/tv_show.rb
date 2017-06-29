@@ -24,14 +24,27 @@ class TvShow < ApplicationRecord
 
 
     def image_url
-      # if self.image.path
-      #   url = self.image
-      # else
         if self.id < 10
             url = 'tv_shows_covers/' + self.id.to_s + '.jpg'
         else
-            url = 'tv_shows_covers/' + (self.id % 9 + 1).to_s + '.jpg'
+            if self.image.path
+                url = self.image
+            else
+                url = 'tv_shows_covers/' + (self.id % 9 + 1).to_s + '.jpg'
+            end
         end
+      # if self.image.path
+      #   url = self.image
+      # else
+      # end
+      # if self.image.path
+      #   url = self.image
+      # else
+        # if self.id < 10
+        #     url = 'tv_shows_covers/' + self.id.to_s + '.jpg'
+        # else
+        #     url = 'tv_shows_covers/' + (self.id % 9 + 1).to_s + '.jpg'
+        # end
       # end
     end
     private
