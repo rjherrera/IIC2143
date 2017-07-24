@@ -1,3 +1,37 @@
+IIC2143 (PUC)
+=============
+
+Información
+-----------
+
+Repositorio para el curso IIC2143 - Ingeniería de Software (Pontificia Universidad Católica de Chile)
+
+Se incluye la entrega inicial con contenido previo a el proyecto semestral bajo la carpeta noflix.
+
+|Material|
+|:-:|
+|[Entrega 0](E0)|
+|[noflix](noflix)|
+
+
+
+Information
+-----------
+
+Repository for the course IIC2143 - Software Engineering (Pontificia Universidad Católica de Chile)
+
+The initial assignment is included with previous content to the semestral course project, under the folder noflix.
+
+|Material|
+|:-:|
+|[Assignment 0](E0)|
+|[noflix](noflix)|
+
+---
+
+
+
+
 # Grupo18
 
 ## Integrantes
